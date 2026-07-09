@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>تجديد وتغيير لون المطابخ في مكة وجدة</title>
+    <title>تجديد وتغيير لون المطابخ في مكة وجدة | خصم 15% لفترة محدودة</title>
     <meta name="description" content="جدد شكل مطبخك من خلال تغيير لون الدواليب وتجديد رخام المطبخ بمادة الإيبوكسي في مكة وجدة. شاهد نماذج حقيقية قبل وبعد." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,6 +36,19 @@
         overflow-x: hidden;
         width: 100%;
       }
+      
+      /* Discount Banner */
+      .discount-banner {
+        background-color: #ef4444;
+        color: white;
+        text-align: center;
+        padding: 0.5rem;
+        font-weight: 900;
+        font-size: 0.9rem;
+        position: relative;
+        z-index: 101;
+      }
+
       header {
         position: sticky;
         top: 0;
@@ -71,7 +84,7 @@
       .nav-links a:hover {
         color: hsl(var(--primary));
       }
-      /* Mobile Menu Toggle */
+      
       .menu-toggle {
         display: block;
         background: none;
@@ -84,10 +97,10 @@
           display: none;
         }
       }
-      /* Mobile Menu Overlay */
+
       .mobile-menu {
         position: fixed;
-        top: 4.5rem;
+        top: 6.5rem; /* Adjusted for discount banner */
         left: 0;
         width: 100%;
         height: 0;
@@ -98,7 +111,6 @@
         border-bottom: 1px solid hsl(var(--border));
         display: flex;
         flex-direction: column;
-        padding: 0;
       }
       .mobile-menu.active {
         height: auto;
@@ -113,17 +125,17 @@
       .btn-primary {
         background-color: hsl(var(--primary));
         color: hsl(var(--primary-foreground));
-        padding: 0.6rem 1.25rem;
+        padding: 0.75rem 1.5rem;
         border-radius: 9999px;
-        font-weight: 700;
-        font-size: 0.9rem;
+        font-weight: 900;
         transition: all 0.3s ease;
         text-align: center;
+        display: inline-block;
+        box-shadow: 0 4px 14px 0 rgba(251, 191, 36, 0.39);
       }
-      @media (max-width: 640px) {
-        .btn-call-header {
-          display: none;
-        }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px 0 rgba(251, 191, 36, 0.45);
       }
 
       section {
@@ -137,7 +149,7 @@
 
       .hero-section {
         padding: 4rem 1rem;
-        background: radial-gradient(circle at top right, hsl(var(--primary) / 0.1), transparent 40%);
+        background: radial-gradient(circle at top right, hsl(var(--primary) / 0.15), transparent 50%);
       }
       @media (min-width: 768px) {
         .hero-section {
@@ -146,26 +158,89 @@
       }
 
       .hero-title {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
         font-weight: 900;
-        line-height: 1.2;
+        line-height: 1.1;
         margin-bottom: 1.5rem;
       }
       @media (min-width: 768px) {
         .hero-title {
-          font-size: 4rem;
+          font-size: 4.5rem;
         }
       }
 
-      .hero-desc {
+      .discount-badge {
+        background-color: #ef4444;
+        color: white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 900;
+        display: inline-block;
+        margin-bottom: 1.5rem;
         font-size: 1.1rem;
-        margin-bottom: 2.5rem;
-        opacity: 0.8;
+        animation: pulse 2s infinite;
       }
-      @media (min-width: 768px) {
-        .hero-desc {
-          font-size: 1.5rem;
-        }
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+
+      /* Form Styles */
+      .order-form-container {
+        background: white;
+        border: 2px solid hsl(var(--primary));
+        border-radius: 1.5rem;
+        padding: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      }
+      .form-group {
+        margin-bottom: 1.5rem;
+        text-align: right;
+      }
+      .form-label {
+        display: block;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+      .form-select, .form-input {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 0.75rem;
+        border: 1px solid hsl(var(--border));
+        font-family: 'Cairo', sans-serif;
+        font-weight: 600;
+        background-color: hsl(var(--muted) / 0.3);
+      }
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+      .color-option {
+        aspect-ratio: 1;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all 0.2s;
+        position: relative;
+      }
+      .color-option.selected {
+        border-color: hsl(var(--primary));
+        transform: scale(1.1);
+      }
+      .color-option span {
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100%;
+        font-size: 0.7rem;
+        text-align: center;
+        font-weight: 700;
       }
 
       .before-after-grid {
@@ -178,25 +253,6 @@
           grid-template-columns: 1fr 1fr;
           gap: 1.5rem;
         }
-      }
-
-      .label-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: rgba(0,0,0,0.75);
-        color: white;
-        padding: 3px 10px;
-        border-radius: 4px;
-        font-weight: 800;
-        font-size: 0.75rem;
-        z-index: 10;
-      }
-      .label-after {
-        right: auto;
-        left: 10px;
-        background: hsl(var(--primary));
-        color: black;
       }
 
       .project-card {
@@ -217,7 +273,7 @@
         object-fit: cover;
       }
 
-      /* Lightbox Styles */
+      /* Lightbox */
       .lightbox {
         display: none;
         position: fixed;
@@ -239,28 +295,6 @@
         max-height: 80vh;
         object-fit: contain;
       }
-      .lightbox-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        color: white;
-        font-size: 2rem;
-        cursor: pointer;
-      }
-
-      .service-card {
-        padding: 1.5rem;
-        border-radius: 1rem;
-        background: hsl(var(--card));
-        border: 1px solid hsl(var(--border));
-        margin-bottom: 1rem;
-      }
-      @media (min-width: 768px) {
-        .service-card {
-          padding: 2.5rem;
-          margin-bottom: 0;
-        }
-      }
 
       footer {
         border-top: 1px solid hsl(var(--border));
@@ -271,6 +305,11 @@
     </style>
   </head>
   <body>
+    <!-- Discount Banner -->
+    <div class="discount-banner">
+      🔥 عرض خاص: خصم 15% على جميع خدمات تجديد المطابخ لفترة محدودة!
+    </div>
+
     <!-- Header -->
     <header>
       <div class="nav-container">
@@ -283,7 +322,7 @@
           <a href="index.html#contact">تواصل معنا</a>
         </nav>
         <div class="flex items-center gap-2">
-          <a href="tel:0560703844" class="btn-primary btn-call-header">اتصل الآن</a>
+          <a href="tel:0560703844" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">اتصل الآن</a>
           <button class="menu-toggle" id="menuToggle">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
@@ -296,7 +335,6 @@
         <a href="epoxy.html">إيبوكسي</a>
         <a href="exterior-paints.html">دهانات خارجية</a>
         <a href="index.html#contact">تواصل معنا</a>
-        <a href="tel:0560703844" class="text-primary font-bold">اتصل الآن: 0560703844</a>
       </div>
     </header>
 
@@ -304,47 +342,68 @@
       <!-- Hero Section -->
       <section class="hero-section text-center">
         <div class="max-w-4xl mx-auto" data-aos="fade-up">
+          <div class="discount-badge">خصم 15% لفترة محدودة</div>
           <h1 class="hero-title">تغيير لون دواليب ورخام المطابخ في مكة وجدة</h1>
-          <p class="hero-desc">جدد شكل مطبخك من خلال تغيير لون الدواليب وتجديد الرخام بمادة الإيبوكسي، وشاهد نماذج حقيقية للنتائج قبل وبعد.</p>
+          <p class="text-xl md:text-2xl mb-10 opacity-80">احصل على مطبخ جديد تماماً بتكلفة أقل. متخصصون في دهان الدواليب وتجديد الرخام بالإيبوكسي.</p>
           <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="https://wa.me/966560703844?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%BA%D9%8A%D9%8A%D8%B1%20%D9%84%D9%88%D9%86%20%D8%AF%D9%88%D8%A7%D9%84%D9%8A%D8%A8%20%D8%A3%D9%88%20%D8%B1%D8%AE%D8%A7%D9%85%20%D8%A7%D9%84%D9%85%D8%B7%D8%A8%D8%AE%20%D9%81%D9%8A%20%D9%85%D9%83%D8%A9%20%D8%A3%D9%88%20%D8%AC%D8%AF%D8%A9." class="btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">تواصل معنا عبر واتساب</a>
-            <a href="#kitchen-results" class="px-8 py-4 rounded-full font-bold text-lg border-2 hover:bg-muted transition-all">شاهد النتائج قبل وبعد</a>
+            <a href="#order-form" class="btn-primary" style="padding: 1.25rem 2.5rem; font-size: 1.25rem;">احجز خصمك الآن</a>
+            <a href="#kitchen-results" class="px-8 py-4 rounded-full font-bold text-lg border-2 hover:bg-muted transition-all">شاهد أعمالنا</a>
           </div>
         </div>
       </section>
 
-      <!-- Services Section -->
-      <section class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-black text-center mb-10" data-aos="fade-up">خدمات تجديد المطابخ</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="service-card" data-aos="fade-up">
-            <h3 class="text-xl font-bold mb-3">تغيير لون دواليب المطابخ</h3>
-            <p class="opacity-70">تجديد مظهر دواليب المطبخ واختيار لون جديد يتناسب مع الديكور العصري.</p>
-          </div>
-          <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="text-xl font-bold mb-3">دهانات دواليب المطابخ</h3>
-            <p class="opacity-70">تنفيذ أعمال دهان احترافية للدواليب لضمان جودة تدوم طويلاً.</p>
-          </div>
-          <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="text-xl font-bold mb-3">تغيير لون الرخام بالإيبوكسي</h3>
-            <p class="opacity-70">تجديد مظهر رخام وأسطح المطابخ باستخدام مادة الإيبوكسي المقاومة.</p>
+      <!-- Order Form Section -->
+      <section id="order-form" style="background-color: hsl(var(--muted) / 0.3);">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl font-black mb-4" data-aos="fade-up">اطلب خدمتك الآن</h2>
+          <p class="mb-10 opacity-70" data-aos="fade-up">اختر اللون والخدمة وسنقوم بالتواصل معك فوراً</p>
+          
+          <div class="order-form-container" data-aos="zoom-in">
+            <div class="form-group">
+              <label class="form-label">نوع الخدمة المطلوبة:</label>
+              <select id="serviceType" class="form-select">
+                <option value="تغيير لون دواليب المطبخ">تغيير لون دواليب المطبخ</option>
+                <option value="تجديد رخام المطبخ بالإيبوكسي">تجديد رخام المطبخ بالإيبوكسي</option>
+                <option value="تجديد شامل (دواليب ورخام)">تجديد شامل (دواليب ورخام)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">اختر اللون المفضل (تقريبي):</label>
+              <div class="color-grid">
+                <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" onclick="selectColor(this, 'أبيض مطفي')" title="أبيض"><span>أبيض</span></div>
+                <div class="color-option" style="background-color: #333333;" onclick="selectColor(this, 'رمادي غامق')" title="رمادي غامق"><span>رمادي</span></div>
+                <div class="color-option" style="background-color: #1a2e44;" onclick="selectColor(this, 'كحلي ملكي')" title="كحلي"><span>كحلي</span></div>
+                <div class="color-option" style="background-color: #2d3e2d;" onclick="selectColor(this, 'زيتي هادئ')" title="زيتي"><span>زيتي</span></div>
+                <div class="color-option" style="background-color: #f5f5dc; border: 1px solid #ddd;" onclick="selectColor(this, 'بيج كريمي')" title="بيج"><span>بيج</span></div>
+                <div class="color-option" style="background-color: #000000;" onclick="selectColor(this, 'أسود فاخر')" title="أسود"><span>أسود</span></div>
+                <div class="color-option" style="background-color: #8b4513;" onclick="selectColor(this, 'بني خشبي')" title="بني"><span>بني</span></div>
+                <div class="color-option" style="background-color: #e5e5e5; border: 1px solid #ddd;" onclick="selectColor(this, 'رخامي/إيبوكسي')" title="رخامي"><span>رخامي</span></div>
+              </div>
+              <input type="hidden" id="selectedColor" value="لم يتم الاختيار">
+            </div>
+
+            <div class="form-group" style="margin-top: 2.5rem;">
+              <label class="form-label">ملاحظات إضافية (اختياري):</label>
+              <textarea id="orderNotes" class="form-input" rows="3" placeholder="مثلاً: مساحة المطبخ، موقعك في مكة أو جدة..."></textarea>
+            </div>
+
+            <button onclick="sendWhatsAppOrder()" class="btn-primary w-full" style="padding: 1rem; font-size: 1.2rem; margin-top: 1rem;">
+              إرسال الطلب عبر واتساب (خصم 15%)
+            </button>
           </div>
         </div>
       </section>
 
       <!-- Kitchen Results -->
-      <section id="kitchen-results" style="background-color: hsl(var(--muted) / 0.2);">
+      <section id="kitchen-results">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-10" data-aos="fade-up">
-            <h2 class="text-3xl font-black mb-4">نتائج تغيير لون دواليب المطابخ</h2>
-            <p class="opacity-70">نماذج حقيقية توضح شكل المطبخ قبل وبعد تغيير اللون.</p>
+            <h2 class="text-3xl font-black mb-4">نتائج حقيقية قبل وبعد</h2>
+            <p class="opacity-70">شاهد جودة العمل والتحول الجذري للمطابخ</p>
           </div>
           
-          <!-- Project 1 -->
           <div class="project-card" data-aos="fade-up">
-            <div class="p-5 border-b">
-              <h3 class="text-xl font-black">مطبخ 1</h3>
-            </div>
             <div class="p-5">
               <div class="before-after-grid">
                 <div class="img-container" onclick="openLightbox(this)">
@@ -358,85 +417,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Project 2 -->
-          <div class="project-card" data-aos="fade-up">
-            <div class="p-5 border-b">
-              <h3 class="text-xl font-black">مطبخ 2</h3>
-            </div>
-            <div class="p-5">
-              <div class="before-after-grid">
-                <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge">قبل</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595015/photo_5942535477263011648_y_t3vit4.jpg" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge label-after">بعد</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595031/photo_5942535477263011646_y_rnw6jm.jpg" alt="بعد">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Marble Results -->
-      <section id="marble-results">
-        <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-10" data-aos="fade-up">
-            <h2 class="text-3xl font-black mb-4">نتائج رخام المطابخ بالإيبوكسي</h2>
-          </div>
-          
-          <!-- Marble Project 1 -->
-          <div class="project-card" data-aos="fade-up">
-            <div class="p-5 border-b">
-              <h3 class="text-xl font-black">رخام 1</h3>
-            </div>
-            <div class="p-5">
-              <div class="before-after-grid">
-                <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge">قبل</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598229/photo_5942535477263011651_y_coprxf.jpg" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge label-after">بعد</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598253/photo_5942535477263011655_y_xoqpyc.jpg" alt="بعد">
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Video Project -->
-          <div class="project-card" data-aos="fade-up">
-            <div class="p-5 border-b">
-              <h3 class="text-xl font-black">رخام 2 (فيديو)</h3>
-            </div>
-            <div class="p-5">
-              <div class="rounded-xl overflow-hidden border-2 border-muted bg-black mb-4">
-                <video controls playsinline preload="metadata" class="w-full">
-                  <source src="https://res.cloudinary.com/dxvjqrb9l/video/upload/v1783598356/document_5942535476803018033_tmhwtf.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="before-after-grid">
-                <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge">قبل</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598336/photo_5942535477263011657_y_htb0wp.jpg" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge label-after">بعد</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598592/photo_5942535477263011660_y_qskqas.jpg" alt="بعد">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Final CTA -->
-      <section class="py-20 px-4 text-center">
-        <div class="max-w-3xl mx-auto" data-aos="zoom-in">
-          <h2 class="text-3xl font-black mb-6">جاهز لتجديد مطبخك؟</h2>
-          <a href="https://wa.me/966560703844?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%BA%D9%8A%D9%8A%D8%B1%20%D9%84%D9%88%D9%86%20%D8%AF%D9%88%D8%A7%D9%84%D9%8A%D8%A8%20%D8%A3%D9%88%20%D8%B1%D8%AE%D8%A7%D9%85%20%D8%A7%D9%84%D9%85%D8%B7%D8%A8%D8%AE%20%D9%81%D9%8A%20%D9%85%D9%83%D8%A9%20%D8%A3%D9%88%20%D8%AC%D8%AF%D8%A9." class="btn-primary" style="padding: 1.25rem 2.5rem; font-size: 1.25rem; display: inline-block;">تواصل عبر واتساب الآن</a>
         </div>
       </section>
     </main>
@@ -449,7 +429,7 @@
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-      <span class="lightbox-close">&times;</span>
+      <span style="position: absolute; top: 1rem; right: 1rem; color: white; font-size: 2.5rem; cursor: pointer;">&times;</span>
       <img id="lightbox-img" src="" alt="">
     </div>
 
@@ -457,17 +437,38 @@
     <script>
       AOS.init({ duration: 800, once: true });
 
-      // Mobile Menu Toggle
+      // Mobile Menu
       const menuToggle = document.getElementById('menuToggle');
       const mobileMenu = document.getElementById('mobileMenu');
       menuToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('active');
       });
 
-      // Close menu when clicking a link
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
-      });
+      // Color Selection
+      function selectColor(element, colorName) {
+        document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+        element.classList.add('selected');
+        document.getElementById('selectedColor').value = colorName;
+      }
+
+      // WhatsApp Order Logic
+      function sendWhatsAppOrder() {
+        const service = document.getElementById('serviceType').value;
+        const color = document.getElementById('selectedColor').value;
+        const notes = document.getElementById('orderNotes').value;
+        
+        const message = `طلب جديد (خصم 15%):
+---------------------------
+*الخدمة:* ${service}
+*اللون المختار:* ${color}
+*ملاحظات:* ${notes || 'لا يوجد'}
+---------------------------
+أرغب في الحصول على عرض سعر وتأكيد خصم الـ 15% المذكور في الموقع.`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/966560703844?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
+      }
 
       // Lightbox
       function openLightbox(container) {
