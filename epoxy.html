@@ -212,7 +212,7 @@ if (window.navigation && window.self !== window.top) {
     <div id="root"></div>
     
   </body>
-</html><!-- Contact Modal Structure -->
+<!-- Contact Modal Structure -->
 <style>
   #contactModal {
     display: none;
@@ -336,6 +336,13 @@ if (window.navigation && window.self !== window.top) {
     closeContactModal();
   }
   
+  // Check URL hash on load
+  window.addEventListener('load', function() {
+    if (window.location.hash === '#contact') {
+      setTimeout(openContactModal, 500);
+    }
+  });
+
   // Bind all contact links
   document.addEventListener("click", function(e) {
     let anchor = e.target.closest("a");
