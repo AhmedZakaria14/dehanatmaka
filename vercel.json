@@ -1,9 +1,11 @@
 {
-  "cleanUrls": false,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     { "source": "/kitchen-renovation", "destination": "/kitchen-renovation.html" },
     { "source": "/interior-paints", "destination": "/interior-paints.html" },
+    { "source": "/exterior-paints", "destination": "/exterior-paints.html" },
     { "source": "/epoxy", "destination": "/epoxy.html" },
-    { "source": "/exterior-paints", "destination": "/exterior-paints.html" }
+    { "source": "/(.*)", "destination": "/$1" }
   ]
 }
