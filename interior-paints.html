@@ -10,271 +10,155 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- تحميل الستايل الأصلي للموقع -->
+    <!-- تحميل نفس ملفات الـ JS والـ CSS الأصلية للموقع -->
+    <script type="module" crossorigin src="assets/index-7b42601c.js"></script>
     <link rel="stylesheet" href="assets/index-f145d107.css">
     
     <style>
-      /* منع الرعشة اللحظية عبر إخفاء الـ root الافتراضي لـ React في هذه الصفحة */
-      #root {
-        display: none !important;
+      /* حقن المحتوى داخل هيكل الصفحة بعد تحميل React */
+      #interior-paints-content {
+        display: none; /* سيتم إظهاره بواسطة JS بعد استقرار الصفحة */
       }
-
-      body {
-        background-color: #fff;
-        margin: 0;
-        padding: 0;
-      }
-
-      /* تنسيق الهيدر اليدوي ليطابق الستايل الأصلي */
-      .custom-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 5%;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        z-index: 10000;
-      }
-      .logo {
-        font-weight: 900;
-        font-size: 1.5rem;
-        color: #2563eb;
-        text-decoration: none;
-      }
-      .nav-links {
-        display: flex;
-        gap: 20px;
-      }
-      .nav-links a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 700;
-        font-size: 0.9rem;
-      }
-      .nav-links a:hover {
-        color: #2563eb;
-      }
-
-      /* تنسيق المحتوى الرئيسي */
-      .interior-main {
-        padding-top: 100px;
-        padding-bottom: 60px;
+      
+      .gallery-section {
+        padding: 60px 20px;
         max-width: 1200px;
         margin: 0 auto;
-        padding-left: 20px;
-        padding-right: 20px;
-        position: relative;
-        z-index: 10;
-      }
-      .interior-title {
-        font-size: 2.5rem;
-        font-weight: 900;
         text-align: center;
-        margin-bottom: 20px;
-        color: #1a1a1a;
       }
-      .interior-desc {
-        font-size: 1.2rem;
-        color: #666;
-        text-align: center;
-        margin-bottom: 50px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-      }
+      
       .gallery-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
+        gap: 25px;
+        margin-top: 40px;
       }
+      
       .gallery-item {
         background: white;
-        border-radius: 20px;
+        border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         transition: transform 0.3s ease;
         border: 1px solid #eee;
       }
+      
       .gallery-item:hover {
         transform: translateY(-10px);
       }
+      
       .gallery-item img {
         width: 100%;
-        height: 280px;
+        height: 250px;
         object-fit: cover;
       }
+      
       .gallery-item-body {
-        padding: 25px;
+        padding: 20px;
         text-align: right;
       }
+      
       .gallery-item-title {
         font-weight: 900;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         margin-bottom: 10px;
-        color: #1e293b;
       }
+      
       .gallery-item-desc {
-        color: #64748b;
-        font-size: 0.95rem;
-        line-height: 1.6;
-      }
-
-      /* الفوتر اليدوي ليطابق الستايل الأصلي ويمنع تداخله */
-      .custom-footer {
-        background: #0f172a;
-        color: white;
-        padding: 60px 20px;
-        text-align: center;
-        margin-top: 80px;
-        position: relative;
-        z-index: 10;
-      }
-      .footer-logo {
-        font-size: 1.8rem;
-        font-weight: 900;
-        margin-bottom: 20px;
-      }
-      .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-bottom: 30px;
-        flex-wrap: wrap;
-      }
-      .footer-links a {
-        color: #94a3b8;
-        text-decoration: none;
-        font-weight: 700;
-        transition: color 0.3s;
-      }
-      .footer-links a:hover {
-        color: white;
-      }
-      .copyright {
-        color: #64748b;
+        color: #777;
         font-size: 0.9rem;
-        border-top: 1px solid #1e293b;
-        padding-top: 30px;
-      }
-
-      .whatsapp-float {
-        position: fixed;
-        bottom: 30px;
-        left: 30px;
-        background: #25d366;
-        color: white;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        z-index: 10000;
-        text-decoration: none;
-      }
-
-      @media (max-width: 768px) {
-        .nav-links { display: none; }
-        .interior-title { font-size: 1.8rem; }
       }
     </style>
   </head>
   <body>
-    <!-- الهيدر المخصص -->
-    <header class="custom-header">
-      <a href="index.html" class="logo">معلم أبو كيان</a>
-      <nav class="nav-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="interior-paints.html" style="color: #2563eb;">دهانات داخلية</a>
-        <a href="exterior-paints.html">دهانات خارجية</a>
-        <a href="epoxy.html">إيبوكسي</a>
-        <a href="kitchen-renovation.html">تجديد مطابخ</a>
-      </nav>
-      <a href="https://wa.me/966560703844" style="background: #2563eb; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 0.8rem;">واتساب</a>
-    </header>
+    <!-- الـ root الأصلي لـ React ليقوم برسم الهيدر والفوتر -->
+    <div id="root"></div>
 
-    <main class="interior-main">
-      <h1 class="interior-title">أعمال الدهانات الداخلية</h1>
-      <p class="interior-desc">نحول جدران منزلك إلى لوحة فنية بأحدث الألوان العالمية والتشطيبات الفاخرة التي تعكس ذوقك الرفيع.</p>
-      
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="./images/ccc06990cb98342aa9451c9ca5e5c43b.webp" alt="صالة مودرن">
-          <div class="gallery-item-body">
-            <h3 class="gallery-item-title">صالة استقبال عصرية</h3>
-            <p class="gallery-item-desc">دهانات مطفية ناعمة مع توزيع إضاءة احترافي يبرز جمالية المكان.</p>
+    <!-- المحتوى الخاص بالدهانات الداخلية -->
+    <div id="interior-paints-content">
+      <section class="gallery-section">
+        <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 20px;">أعمال الدهانات الداخلية</h1>
+        <p style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto 40px;">نحول جدران منزلك إلى لوحة فنية بأحدث الألوان العالمية والتشطيبات الفاخرة.</p>
+        
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="./images/ccc06990cb98342aa9451c9ca5e5c43b.webp" alt="صالة مودرن">
+            <div class="gallery-item-body">
+              <h3 class="gallery-item-title">صالة استقبال عصرية</h3>
+              <p class="gallery-item-desc">دهانات مطفية ناعمة مع توزيع إضاءة احترافي يبرز جمالية المكان.</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="./images/f80add5e2472c679adf767df93a8e7cf.webp" alt="غرفة معيشة">
+            <div class="gallery-item-body">
+              <h3 class="gallery-item-title">غرفة معيشة هادئة</h3>
+              <p class="gallery-item-desc">استخدام ألوان النيود والرمادي الفاتح لإعطاء شعور بالراحة والاتساع.</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="./images/5078a1c3e7cdbaa62b51e190f4bd101e.webp" alt="مجلس كلاسيكي">
+            <div class="gallery-item-body">
+              <h3 class="gallery-item-title">مجلس كلاسيكي فخم</h3>
+              <p class="gallery-item-desc">دمج بين الدهانات الفاخرة والديكورات الجبسية بلمسات فنية متقنة.</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="./images/2c7fde3bd8bef9b9d7f6a1c29c17d7d1.webp" alt="ممر داخلي">
+            <div class="gallery-item-body">
+              <h3 class="gallery-item-title">تشطيب ممرات وصالات</h3>
+              <p class="gallery-item-desc">دقة عالية في التنفيذ تضمن ملمساً ناعماً ومظهراً براقاً يدوم لسنوات.</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="./images/897ec8700d20334d82dec2ec03c54bc4.webp" alt="غرفة نوم">
+            <div class="gallery-item-body">
+              <h3 class="gallery-item-title">غرف نوم مودرن</h3>
+              <p class="gallery-item-desc">تناسق لوني يبعث على الهدوء مع استخدام أفضل أنواع الدهانات المقاومة.</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="./images/4a0a3851c360a9632c4aff21d26c1ede.webp" alt="ديكور فوم">
+            <div class="gallery-item-body">
+              <h3 class="gallery-item-title">ديكورات فوم داخلية</h3>
+              <p class="gallery-item-desc">تركيب إطارات الفوم بدقة متناهية مع دهانها بألوان تتناسب مع ديكور المنزل.</p>
+            </div>
           </div>
         </div>
+      </section>
+    </div>
 
-        <div class="gallery-item">
-          <img src="./images/f80add5e2472c679adf767df93a8e7cf.webp" alt="غرفة معيشة">
-          <div class="gallery-item-body">
-            <h3 class="gallery-item-title">غرفة معيشة هادئة</h3>
-            <p class="gallery-item-desc">استخدام ألوان النيود والرمادي الفاتح لإعطاء شعور بالراحة والاتساع.</p>
-          </div>
-        </div>
+    <script>
+      // وظيفة ذكية لحقن المحتوى داخل هيكل React الأصلي
+      function injectContent() {
+        const root = document.getElementById('root');
+        const content = document.getElementById('interior-paints-content');
+        
+        // البحث عن المكان المناسب لحقن المحتوى (عادة بعد الهيدر وقبل الفوتر)
+        // في تطبيق React هذا، سنقوم بالبحث عن أول عنصر div كبير أو main
+        const target = root.querySelector('main') || root.querySelector('.flex-col') || root;
+        
+        if (target && target.children.length > 0) {
+          // إفراغ محتوى الصفحة الوسطي (الذي قد يكون فارغاً أو خطأ)
+          // والحفاظ على الهيدر والفوتر إذا كانا خارج الـ main
+          // لكن الأفضل هو استبدال المحتوى الداخلي فقط
+          
+          // محاولة ذكية: إيجاد العنصر الذي يحتوي على نص "دهانات داخلية" وحقن الصور بعده
+          content.style.display = 'block';
+          target.innerHTML = ''; // تنظيف المحتوى الوسطي لـ React
+          target.appendChild(content);
+          return true;
+        }
+        return false;
+      }
 
-        <div class="gallery-item">
-          <img src="./images/5078a1c3e7cdbaa62b51e190f4bd101e.webp" alt="مجلس كلاسيكي">
-          <div class="gallery-item-body">
-            <h3 class="gallery-item-title">مجلس كلاسيكي فخم</h3>
-            <p class="gallery-item-desc">دمج بين الدهانات الفاخرة والديكورات الجبسية بلمسات فنية متقنة.</p>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="./images/2c7fde3bd8bef9b9d7f6a1c29c17d7d1.webp" alt="ممر داخلي">
-          <div class="gallery-item-body">
-            <h3 class="gallery-item-title">تشطيب ممرات وصالات</h3>
-            <p class="gallery-item-desc">دقة عالية في التنفيذ تضمن ملمساً ناعماً ومظهراً براقاً يدوم لسنوات.</p>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="./images/897ec8700d20334d82dec2ec03c54bc4.webp" alt="غرفة نوم">
-          <div class="gallery-item-body">
-            <h3 class="gallery-item-title">غرف نوم مودرن</h3>
-            <p class="gallery-item-desc">تناسق لوني يبعث على الهدوء مع استخدام أفضل أنواع الدهانات المقاومة.</p>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="./images/4a0a3851c360a9632c4aff21d26c1ede.webp" alt="ديكور فوم">
-          <div class="gallery-item-body">
-            <h3 class="gallery-item-title">ديكورات فوم داخلية</h3>
-            <p class="gallery-item-desc">تركيب إطارات الفوم بدقة متناهية مع دهانها بألوان تتناسب مع ديكور المنزل.</p>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- الفوتر المخصص -->
-    <footer class="custom-footer">
-      <div class="footer-logo">معلم أبو كيان</div>
-      <div class="footer-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="interior-paints.html">دهانات داخلية</a>
-        <a href="exterior-paints.html">دهانات خارجية</a>
-        <a href="epoxy.html">إيبوكسي</a>
-        <a href="kitchen-renovation.html">تجديد مطابخ</a>
-      </div>
-      <div class="copyright">
-        © 2026 جميع الحقوق محفوظة - تم التطوير بواسطة <a href="https://nasharhub.com" style="color: #3b82f6; text-decoration: none;">NasharHub.com</a>
-      </div>
-    </footer>
-
-    <!-- زر واتساب العائم -->
-    <a href="https://wa.me/966560703844" class="whatsapp-float">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.981z"/></svg>
-    </a>
-
-    <!-- عنصر root فارغ لمنع تعارض React -->
-    <div id="root" style="display: none !important;"></div>
+      // المحاولة بشكل متكرر حتى يتم تحميل React بالكامل
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (injectContent() || attempts > 50) {
+          clearInterval(interval);
+        }
+      }, 100);
+    </script>
   </body>
 </html>
