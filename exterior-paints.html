@@ -211,6 +211,6 @@ if (window.navigation && window.self !== window.top) {
   <body>
     <div id="root"></div>
     
-<script>document.addEventListener("click",function(e){const t=e.target.closest("a");if(t&&t.getAttribute("href")){const n=t.getAttribute("href");if(n.includes("kitchen-renovation")||n.includes("interior-paints")||n.includes("epoxy")||n.includes("exterior-paints")){e.preventDefault(),e.stopPropagation();let t=n;n.includes("kitchen-renovation")?t="kitchen-renovation.html":n.includes("interior-paints")?t="interior-paints.html":n.includes("epoxy")?t="epoxy.html":n.includes("exterior-paints")&&(t="exterior-paints.html"),window.location.href=t}}},!0);</script>
+<script>(function(){function e(){const e=document.querySelectorAll("a");e.forEach(e=>{const t=e.textContent.trim(),n=e.getAttribute("href");t.includes("دهانات داخلية")&&n&&n.includes("kitchen-renovation")&&e.setAttribute("href","interior-paints.html"),t.includes("تجديد المطابخ")&&n&&!n.includes("kitchen-renovation")&&e.setAttribute("href","kitchen-renovation.html")})}e();const t=new MutationObserver(t=>{e()});t.observe(document.body,{childList:!0,subtree:!0}),document.addEventListener("click",function(e){const t=e.target.closest("a");if(t){const n=t.textContent.trim();n.includes("دهانات داخلية")&&(window.location.href="interior-paints.html",e.preventDefault(),e.stopPropagation())}},!0)})();</script>
   </body>
 </html>
