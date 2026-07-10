@@ -1,192 +1,234 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>معلم دهانات مكة – دهانات وإيبوكسي في مكة</title>
-    <meta name="description" content="أفضل معلم دهانات وإيبوكسي في مكة. جودة مضمونة، أسعار منافسة، وخدمة فورية في مكة المكرمة." />
-    <meta name="keywords" content="دهانات مكة, إيبوكسي مكة, معلم دهانات مكة, معلم إيبوكسي, ترميم دهانات, ديكورات فوم, تغيير لون السيراميك, معرض أعمال دهانات" />
+    <title>معلم أبو كيان – دهانات وإيبوكسي في مكة</title>
+    <meta name="description" content="أفضل معلم دهانات وإيبوكسي في مكة. غيّر شكل بيتك بدون تكسير مع أبو كيان. جودة مضمونة، أسعار منافسة، وخدمة فورية في مكة المكرمة." />
+    <meta name="keywords" content="دهانات مكة, إيبوكسي مكة, معلم دهانات أبو كيان, معلم إيبوكسي, ترميم دهانات, ديكورات فوم, تغيير لون السيراميك, معرض أعمال دهانات" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="assets/index-7b42601c.js"></script>
     <link rel="stylesheet" href="assets/index-f145d107.css">
-</head>
-<body>
+    <script type="module">
+window.onerror = (message, source, lineno, colno, errorObj) => {
+	const errorDetails = errorObj ? JSON.stringify({
+		name: errorObj.name,
+		message: errorObj.message,
+		stack: errorObj.stack,
+		source,
+		lineno,
+		colno,
+	}) : null;
+
+	window.parent.postMessage({
+		type: 'horizons-runtime-error',
+		message,
+		error: errorDetails
+	}, '*');
+};
+</script>
+    <script type="module">
+const observer = new MutationObserver((mutations) => {
+	for (const mutation of mutations) {
+		for (const addedNode of mutation.addedNodes) {
+			if (
+				addedNode.nodeType === Node.ELEMENT_NODE &&
+				(
+					addedNode.tagName?.toLowerCase() === 'vite-error-overlay' ||
+					addedNode.classList?.contains('backdrop')
+				)
+			) {
+				handleViteOverlay(addedNode);
+			}
+		}
+	}
+});
+
+observer.observe(document.documentElement, {
+	childList: true,
+	subtree: true
+});
+
+function handleViteOverlay(node) {
+	if (!node.shadowRoot) {
+		return;
+	}
+
+	const backdrop = node.shadowRoot.querySelector('.backdrop');
+
+	if (backdrop) {
+		const overlayHtml = backdrop.outerHTML;
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(overlayHtml, 'text/html');
+		const messageBodyElement = doc.querySelector('.message-body');
+		const fileElement = doc.querySelector('.file');
+		const messageText = messageBodyElement ? messageBodyElement.textContent.trim() : '';
+		const fileText = fileElement ? fileElement.textContent.trim() : '';
+		const error = messageText + (fileText ? ' File:' + fileText : '');
+
+		window.parent.postMessage({
+			type: 'horizons-vite-error',
+			error,
+		}, '*');
+	}
+}
+</script>
+    <script type="module">
+const originalConsoleError = console.error;
+const MATCH_LINE_COL_REGEX = /:(\d+):(\d+)\)?\s*$/; // regex to match the :lineNum:colNum
+const MATCH_AT_REGEX = /^\s*at\s+(?:async\s+)?(?:.*?\s+)?\(?/; // regex to remove the 'at' keyword and any 'async' or function name
+const MATCH_PATH_REGEX = /^\//; // regex to remove the leading slash
+
+function parseStackFrameLine(line) {
+	const lineColMatch = line.match(MATCH_LINE_COL_REGEX);
+	if (!lineColMatch) return null;
+	const [, lineNum, colNum] = lineColMatch;
+	const suffix = `:${lineNum}:${colNum}`;
+	const idx = line.lastIndexOf(suffix);
+	if (idx === -1) return null;
+	const before = line.substring(0, idx);
+	const path = before.replace(MATCH_AT_REGEX, '').trim();
+	if (!path) return null;
+
+	try {
+		const pathname = new URL(path).pathname;
+		const filePath = pathname.replace(MATCH_PATH_REGEX, '') || pathname;
+		return `${filePath}:${lineNum}:${colNum}`;
+	} catch (e) {
+		const filePath = path.replace(MATCH_PATH_REGEX, '') || path;
+		return `${filePath}:${lineNum}:${colNum}`;
+	}
+}
+
+function getFilePathFromStack(stack, skipFrames = 0) {
+	if (!stack || typeof stack !== 'string') return null;
+	const lines = stack.split('\n').slice(1);
+
+	const frames = lines.map(line => parseStackFrameLine(line.replace(/\r$/, ''))).filter(Boolean);
+
+	return frames[skipFrames] ?? null;
+}
+
+console.error = function(...args) {
+	originalConsoleError.apply(console, args);
+
+	let errorString = '';
+	let filePath = null;
+
+	for (let i = 0; i < args.length; i++) {
+		const arg = args[i];
+		if (arg instanceof Error) {
+			filePath = getFilePathFromStack(arg.stack, 0);
+			errorString = `${arg.name}: ${arg.message}`;
+			if (filePath) {
+				errorString = `${errorString} at ${filePath}`;
+			}
+			break;
+		}
+	}
+
+	if (!errorString) {
+		errorString = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' ');
+		const stack = new Error().stack;
+		filePath = getFilePathFromStack(stack, 1);
+		if (filePath) {
+			errorString = `${errorString} at ${filePath}`;
+		}
+	}
+
+	window.parent.postMessage({
+		type: 'horizons-console-error',
+		error: errorString
+	}, '*');
+};
+</script>
+    <script type="module">
+const originalFetch = window.fetch;
+
+window.fetch = function(...args) {
+	const url = args[0] instanceof Request ? args[0].url : args[0];
+
+	// Skip WebSocket URLs
+	if (url.startsWith('ws:') || url.startsWith('wss:')) {
+		return originalFetch.apply(this, args);
+	}
+
+	return originalFetch.apply(this, args)
+		.then(async response => {
+			const contentType = response.headers.get('Content-Type') || '';
+
+			// Exclude HTML document responses
+			const isDocumentResponse =
+				contentType.includes('text/html') ||
+				contentType.includes('application/xhtml+xml');
+
+			if (!response.ok && !isDocumentResponse) {
+					const responseClone = response.clone();
+					const errorFromRes = await responseClone.text();
+					const requestUrl = response.url;
+					console.error(`Fetch error from ${requestUrl}: ${errorFromRes}`);
+			}
+
+			return response;
+		})
+		.catch(error => {
+			if (!url.match(/.html?$/i)) {
+				console.error(error);
+			}
+
+			throw error;
+		});
+};
+</script>
+    <script type="module">
+if (window.navigation && window.self !== window.top) {
+	window.navigation.addEventListener('navigate', (event) => {
+		const url = event.destination.url;
+
+		try {
+			const destinationUrl = new URL(url);
+			const destinationOrigin = destinationUrl.origin;
+			const currentOrigin = window.location.origin;
+
+			if (destinationOrigin === currentOrigin) {
+				return;
+			}
+		} catch (error) {
+			return;
+		}
+
+		window.parent.postMessage({
+			type: 'horizons-navigation-error',
+			url,
+		}, '*');
+	});
+}
+</script>
+  </head>
+  <body>
     <div id="root"></div>
-
-    <!-- Global Navigation & Routing Fix -->
     <script>
-        (function() {
-            function updateLinks() {
-                const links = document.querySelectorAll("a");
-                links.forEach(link => {
-                    const text = link.textContent.trim();
-                    const href = link.getAttribute("href");
-                    
-                    // Fix Interior Paints link
-                    if (text.includes("دهانات داخلية") || (href && (href === "/interior-paints" || href.includes("interior-paints.html")))) {
-                        link.setAttribute("href", "interior-paints.html");
-                    }
-                    // Fix Kitchen Renovation link
-                    if (text.includes("تجديد المطابخ") || text.includes("Kitchen Renovation") || (href && (href === "/kitchen-renovation" || href.includes("kitchen-renovation.html")))) {
-                        link.setAttribute("href", "kitchen-renovation.html");
-                    }
-                    // Fix Exterior Paints link
-                    if (text.includes("دهانات خارجية") || (href && (href === "/exterior-paints" || href.includes("exterior-paints.html")))) {
-                        link.setAttribute("href", "exterior-paints.html");
-                    }
-                    // Fix Epoxy link
-                    if (text.includes("إيبوكسي") || text.includes("Epoxy") || (href && (href === "/epoxy" || href.includes("epoxy.html")))) {
-                        link.setAttribute("href", "epoxy.html");
-                    }
-                });
+      // Force navigation for service pages to bypass React Router
+      document.addEventListener('click', function(e) {
+        const a = e.target.closest('a');
+        if (a && a.href) {
+          const url = new URL(a.href);
+          if (url.origin === window.location.origin) {
+            if (url.pathname.includes('interior-paints')) {
+              e.preventDefault();
+              window.location.href = 'interior-paints.html';
+            } else if (url.pathname.includes('kitchen-renovation')) {
+              e.preventDefault();
+              window.location.href = 'kitchen-renovation.html';
             }
-
-            // Run on load and on DOM changes (for React)
-            updateLinks();
-            const observer = new MutationObserver(updateLinks);
-            observer.observe(document.body, { childList: true, subtree: true });
-
-            // Intercept clicks to ensure navigation
-            document.addEventListener("click", function(e) {
-                const link = e.target.closest("a");
-                if (link) {
-                    const text = link.textContent.trim();
-                    const href = link.getAttribute("href");
-                    
-                    if (text.includes("دهانات داخلية") || (href && href.includes("interior-paints.html"))) {
-                        window.location.href = "interior-paints.html";
-                        e.preventDefault();
-                        e.stopPropagation();
-                    } else if (text.includes("تجديد المطابخ") || (href && href.includes("kitchen-renovation.html"))) {
-                        window.location.href = "kitchen-renovation.html";
-                        e.preventDefault();
-                        e.stopPropagation();
-                    } else if (text.includes("دهانات خارجية") || (href && href.includes("exterior-paints.html"))) {
-                        window.location.href = "exterior-paints.html";
-                        e.preventDefault();
-                        e.stopPropagation();
-                    } else if (text.includes("إيبوكسي") || (href && href.includes("epoxy.html"))) {
-                        window.location.href = "epoxy.html";
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                }
-            }, true);
-        })();
+          }
+        }
+      }, true);
     </script>
-
-    <!-- Contact Modal Structure -->
-    <style>
-        #contactModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 9999999;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            backdrop-filter: blur(5px);
-        }
-        #contactModal.active { display: flex; }
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-            text-align: right;
-            color: #000;
-        }
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #94a3b8;
-        }
-        .modal-input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            margin-bottom: 1rem;
-            font-family: 'Cairo', sans-serif;
-            background: #f8fafc;
-        }
-        .modal-btn {
-            background: #2563eb;
-            color: #fff;
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 0.75rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .modal-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
-    </style>
-
-    <div id="contactModal" onclick="if(event.target == this) closeContactModal()">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeContactModal()">&times;</span>
-            <h2 class="text-2xl font-black mb-2">تواصل معنا الآن</h2>
-            <p class="text-slate-500 mb-6">يسعدنا خدمتك، اترك بياناتك وسنتصل بك فوراً</p>
-            
-            <label class="block font-bold mb-1">الاسم الكريم</label>
-            <input type="text" id="modalName" class="modal-input" placeholder="مثال: أحمد محمد">
-            
-            <label class="block font-bold mb-1">نوع الخدمة</label>
-            <select id="modalService" class="modal-input">
-                <option value="دهانات داخلية">دهانات داخلية</option>
-                <option value="دهانات خارجية">دهانات خارجية</option>
-                <option value="تجديد مطابخ">تجديد مطابخ</option>
-                <option value="إيبوكسي">إيبوكسي</option>
-            </select>
-            
-            <label class="block font-bold mb-1">رسالتك</label>
-            <textarea id="modalMsg" class="modal-input" rows="3" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
-            
-            <button onclick="sendModalWhatsApp()" class="modal-btn">إرسال الطلب عبر واتساب</button>
-        </div>
-    </div>
-
-    <script>
-        function openContactModal() {
-            document.getElementById('contactModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeContactModal() {
-            document.getElementById('contactModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        function sendModalWhatsApp() {
-            const name = document.getElementById('modalName').value;
-            const service = document.getElementById('modalService').value;
-            const msg = document.getElementById('modalMsg').value;
-            const text = `طلب تواصل جديد:\n*الاسم:* ${name || 'غير محدد'}\n*الخدمة:* ${service}\n*الرسالة:* ${msg || 'لا توجد'}`;
-            window.open(`https://wa.me/966560703844?text=${encodeURIComponent(text)}`, '_blank');
-            closeContactModal();
-        }
-
-        // Bind contact links
-        document.addEventListener("click", function(e) {
-            const anchor = e.target.closest("a");
-            if (anchor && anchor.getAttribute("href") && anchor.getAttribute("href").includes("contact")) {
-                e.preventDefault();
-                openContactModal();
-            }
-        });
-    </script>
-</body>
+    
+<script>(function(){function e(){const e=document.querySelectorAll("a");e.forEach(e=>{const t=e.textContent.trim(),n=e.getAttribute("href");t.includes("دهانات داخلية")&&n&&n.includes("kitchen-renovation")&&e.setAttribute("href","interior-paints.html"),t.includes("تجديد المطابخ")&&n&&!n.includes("kitchen-renovation")&&e.setAttribute("href","kitchen-renovation.html")})}e();const t=new MutationObserver(t=>{e()});t.observe(document.body,{childList:!0,subtree:!0}),document.addEventListener("click",function(e){const t=e.target.closest("a");if(t){const n=t.textContent.trim();n.includes("دهانات داخلية")&&(window.location.href="interior-paints.html",e.preventDefault(),e.stopPropagation())}},!0)})();</script>
+  </body>
 </html>
