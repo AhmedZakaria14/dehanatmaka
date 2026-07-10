@@ -211,6 +211,137 @@ if (window.navigation && window.self !== window.top) {
   <body>
     <div id="root"></div>
     
-<script>document.addEventListener("click", function(e) { let anchor = e.target.closest("a"); if (anchor && anchor.getAttribute("href") && anchor.getAttribute("href").includes("contact")) { window.location.href = "index.html#contact"; e.preventDefault(); } });</script>
   </body>
-</html>
+</html><!-- Contact Modal Structure -->
+<style>
+  #contactModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 9999999;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+  }
+  #contactModal.active { display: flex; }
+  .modal-content {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    text-align: right;
+    animation: modalSlide 0.3s ease-out;
+  }
+  @keyframes modalSlide {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .close-modal {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    color: #999;
+  }
+  .modal-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; color: #000; }
+  .modal-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; }
+  .modal-form-group { margin-bottom: 1rem; }
+  .modal-label { display: block; font-weight: 700; margin-bottom: 0.3rem; font-size: 0.9rem; }
+  .modal-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    font-family: 'Cairo', sans-serif;
+    background: #f9f9f9;
+  }
+  .modal-btn {
+    background: #fbbf24;
+    color: #000;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+  .modal-btn:hover { background: #f59e0b; transform: translateY(-2px); }
+</style>
+
+<div id="contactModal" onclick="if(event.target == this) closeContactModal()">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeContactModal()">&times;</span>
+    <h2 class="modal-title">تواصل معنا الآن</h2>
+    <p class="modal-subtitle">يسعدنا خدمتك، اترك بياناتك وسنتصل بك فوراً</p>
+    
+    <div class="modal-form-group">
+      <label class="modal-label">الاسم الكريم</label>
+      <input type="text" id="modalName" class="modal-input" placeholder="مثال: أحمد محمد">
+    </div>
+    
+    <div class="modal-form-group">
+      <label class="modal-label">نوع الخدمة</label>
+      <select id="modalService" class="modal-input">
+        <option value="تجديد مطابخ">تجديد مطابخ</option>
+        <option value="إيبوكسي">إيبوكسي</option>
+        <option value="دهانات داخلية">دهانات داخلية</option>
+        <option value="دهانات خارجية">دهانات خارجية</option>
+        <option value="أخرى">أخرى</option>
+      </select>
+    </div>
+    
+    <div class="modal-form-group">
+      <label class="modal-label">رسالتك أو طلبك</label>
+      <textarea id="modalMsg" class="modal-input" rows="3" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
+    </div>
+    
+    <button onclick="sendModalWhatsApp()" class="modal-btn">إرسال الطلب عبر واتساب</button>
+  </div>
+</div>
+
+<script>
+  function openContactModal() {
+    document.getElementById('contactModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeContactModal() {
+    document.getElementById('contactModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+  function sendModalWhatsApp() {
+    const name = document.getElementById('modalName').value;
+    const service = document.getElementById('modalService').value;
+    const msg = document.getElementById('modalMsg').value;
+    const text = `طلب تواصل جديد:
+---------------------------
+*الاسم:* ${name || 'غير محدد'}
+*الخدمة:* ${service}
+*الرسالة:* ${msg || 'لا توجد'}
+---------------------------
+أرغب في الحصول على استشارة أو عرض سعر.`;
+    window.open(`https://wa.me/966560703844?text=${encodeURIComponent(text)}`, '_blank');
+    closeContactModal();
+  }
+  
+  // Bind all contact links
+  document.addEventListener("click", function(e) {
+    let anchor = e.target.closest("a");
+    if (anchor && anchor.getAttribute("href") && anchor.getAttribute("href").includes("contact")) {
+      e.preventDefault();
+      openContactModal();
+    }
+  });
+</script>
