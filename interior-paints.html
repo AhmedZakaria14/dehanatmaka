@@ -20,6 +20,7 @@
         font-family: 'Cairo', sans-serif;
         background-color: #f8fafc;
         margin: 0;
+        overflow-x: hidden;
       }
 
       /* هيدر ثابت يطابق الأصلي */
@@ -31,7 +32,7 @@
         background: white;
         z-index: 1000;
         box-shadow: 0 1px 10px rgba(0,0,0,0.05);
-        height: 80px;
+        height: 70px;
         display: flex;
         align-items: center;
         padding: 0 5%;
@@ -54,30 +55,87 @@
       }
 
       .logo-text {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: 900;
-        color: #1e293b;
+        color: #0f172a;
       }
 
-      .nav-links {
-        display: flex;
+      .nav-links-desktop {
+        display: none;
         gap: 25px;
       }
 
-      .nav-links a {
+      @media (min-width: 1024px) {
+        .nav-links-desktop { display: flex; }
+        .mobile-menu-btn { display: none; }
+      }
+
+      .nav-links-desktop a {
         text-decoration: none;
         color: #475569;
         font-weight: 700;
         transition: color 0.3s;
+        font-size: 0.95rem;
       }
 
-      .nav-links a:hover {
+      .nav-links-desktop a:hover {
         color: #2563eb;
+      }
+
+      /* زر قائمة الجوال */
+      .mobile-menu-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+      }
+
+      /* القائمة الجانبية للجوال */
+      .mobile-sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100%;
+        background: white;
+        z-index: 2000;
+        transition: right 0.3s ease;
+        padding: 40px 20px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      }
+
+      .mobile-sidebar.active {
+        right: 0;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+        display: none;
+      }
+
+      .overlay.active {
+        display: block;
+      }
+
+      .mobile-sidebar a {
+        display: block;
+        padding: 15px 0;
+        text-decoration: none;
+        color: #1e293b;
+        font-weight: 700;
+        border-bottom: 1px solid #f1f5f9;
       }
 
       /* المحتوى الرئيسي */
       .main-content {
-        padding-top: 120px;
+        padding-top: 100px;
         padding-bottom: 80px;
         max-width: 1200px;
         margin: 0 auto;
@@ -87,18 +145,18 @@
 
       .section-header {
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 40px;
       }
 
       .section-title {
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         font-weight: 900;
         color: #0f172a;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
 
       .section-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: #64748b;
         max-width: 700px;
         margin: 0 auto;
@@ -106,26 +164,21 @@
 
       .gallery-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
       }
 
       .gallery-card {
         background: white;
-        border-radius: 20px;
+        border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         border: 1px solid #e2e8f0;
-        transition: transform 0.3s ease;
-      }
-
-      .gallery-card:hover {
-        transform: translateY(-10px);
       }
 
       .image-container {
         width: 100%;
-        height: 280px;
+        height: 250px;
         overflow: hidden;
       }
 
@@ -136,37 +189,37 @@
       }
 
       .card-body {
-        padding: 25px;
+        padding: 20px;
       }
 
       .card-tag {
         display: inline-block;
-        padding: 4px 12px;
+        padding: 2px 10px;
         background: #eff6ff;
         color: #2563eb;
         border-radius: 50px;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 700;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
 
       .card-title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 900;
         color: #1e293b;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
 
       .card-text {
         color: #64748b;
-        font-size: 0.95rem;
-        line-height: 1.7;
+        font-size: 0.9rem;
+        line-height: 1.6;
       }
 
-      /* الفوتر يطابق الأصلي */
+      /* الفوتر */
       .footer-bg {
         background: #0f172a;
-        padding: 80px 20px 40px;
+        padding: 60px 20px 40px;
         color: #94a3b8;
       }
 
@@ -174,16 +227,16 @@
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
         text-align: right;
       }
 
       .footer-title {
         color: white;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 900;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
       }
 
       .footer-links {
@@ -192,46 +245,55 @@
       }
 
       .footer-links li {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
 
       .footer-links a {
         color: #94a3b8;
         text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      .footer-links a:hover {
-        color: white;
-      }
-
-      .copyright-bar {
-        max-width: 1200px;
-        margin: 60px auto 0;
-        padding-top: 30px;
-        border-top: 1px solid #1e293b;
-        text-align: center;
         font-size: 0.9rem;
       }
 
-      .whatsapp-btn {
+      .copyright-bar {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #1e293b;
+        text-align: center;
+        font-size: 0.85rem;
+      }
+
+      /* الأزرار العائمة المزدوجة */
+      .floating-actions {
         position: fixed;
-        bottom: 30px;
-        left: 30px;
-        background: #25d366;
-        width: 60px;
-        height: 60px;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 3000;
+      }
+
+      .floating-btn {
+        width: 55px;
+        height: 55px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-        z-index: 2000;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s;
       }
 
-      @media (max-width: 768px) {
-        .nav-links { display: none; }
-        .section-title { font-size: 2rem; }
+      .floating-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .btn-call { background-color: #2563eb; color: white; }
+      .btn-whatsapp { background-color: #25d366; color: white; }
+
+      @media (max-width: 480px) {
+        .section-title { font-size: 1.8rem; }
+        .gallery-grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -240,107 +302,101 @@
     <header class="header-container">
       <div class="header-content">
         <a href="/" class="logo-area">
-          <svg class="text-brand-blue h-6 w-6" fill="none" height="24" stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"></path><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"></path><path d="M14.5 17.5 4.5 15"></path></svg>
+          <svg class="h-6 w-6" fill="none" height="24" stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"></path><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"></path><path d="M14.5 17.5 4.5 15"></path></svg>
           <span class="logo-text">معلم دهانات مكة</span>
         </a>
-        <nav class="nav-links">
+        
+        <nav class="nav-links-desktop">
           <a href="/">الرئيسية</a>
           <a href="interior-paints.html" style="color: #2563eb;">دهانات داخلية</a>
           <a href="/exterior-paints">دهانات خارجية</a>
           <a href="/epoxy">إيبوكسي</a>
           <a href="index.html#contact">تواصل معنا</a>
         </nav>
-        <a href="https://wa.me/966560703844" style="background: #2563eb; color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 0.9rem;">واتساب</a>
+
+        <button class="mobile-menu-btn" onclick="toggleMenu()">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
       </div>
     </header>
+
+    <!-- القائمة الجانبية للجوال -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-sidebar" id="sidebar">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <span class="logo-text">القائمة</span>
+        <button onclick="toggleMenu()" style="background: none; border: none; font-size: 1.5rem;">&times;</button>
+      </div>
+      <a href="/" onclick="toggleMenu()">الرئيسية</a>
+      <a href="interior-paints.html" onclick="toggleMenu()" style="color: #2563eb;">دهانات داخلية</a>
+      <a href="/exterior-paints" onclick="toggleMenu()">دهانات خارجية</a>
+      <a href="/epoxy" onclick="toggleMenu()">إيبوكسي</a>
+      <a href="index.html#contact" onclick="toggleMenu()">تواصل معنا</a>
+    </div>
 
     <main class="main-content">
       <div class="section-header">
         <h1 class="section-title">أعمال الدهانات الداخلية</h1>
-        <p class="section-subtitle">نقدم لكم نخبة من أعمالنا في تشطيب وتجديد المنازل في مكة المكرمة، حيث الدقة في التنفيذ والجمال في الاختيار.</p>
+        <p class="section-subtitle">تشكيلة مختارة من أرقى أعمالنا في الدهانات والديكورات الداخلية بمكة المكرمة.</p>
       </div>
 
       <div class="gallery-grid">
-        <!-- Card 1 -->
         <div class="gallery-card">
-          <div class="image-container">
-            <img src="./images/ccc06990cb98342aa9451c9ca5e5c43b.webp" alt="دهانات صالات">
-          </div>
+          <div class="image-container"><img src="./images/ccc06990cb98342aa9451c9ca5e5c43b.webp" alt="دهان صالة"></div>
           <div class="card-body">
-            <span class="card-tag">صالات استقبال</span>
-            <h3 class="card-title">لمسة عصرية بيضاء</h3>
-            <p class="card-text">تنفيذ دهانات بيضاء ناصعة مع إضاءة ليد مخفية تبرز نقاء اللون وتضفي اتساعاً للمكان.</p>
+            <span class="card-tag">صالات</span>
+            <h3 class="card-title">صالة مودرن بيضاء</h3>
+            <p class="card-text">تنفيذ دهانات ناصعة مع إضاءة ليد مخفية تبرز جمالية التصميم المعماري.</p>
           </div>
         </div>
-
-        <!-- Card 2 -->
         <div class="gallery-card">
-          <div class="image-container">
-            <img src="./images/f80add5e2472c679adf767df93a8e7cf.webp" alt="غرف معيشة">
-          </div>
+          <div class="image-container"><img src="./images/f80add5e2472c679adf767df93a8e7cf.webp" alt="غرفة معيشة"></div>
           <div class="card-body">
             <span class="card-tag">غرف معيشة</span>
-            <h3 class="card-title">تدرجات الرمادي الهادئ</h3>
-            <p class="card-text">استخدام ألوان الرمادي الفاتح المطفية لخلق جو من الهدوء والراحة النفسية في غرف المعيشة.</p>
+            <h3 class="card-title">رمادي فاتح هادئ</h3>
+            <p class="card-text">ألوان عصرية تمنح الغرفة شعوراً بالراحة والاتساع مع تشطيب مطفي فاخر.</p>
           </div>
         </div>
-
-        <!-- Card 3 -->
         <div class="gallery-card">
-          <div class="image-container">
-            <img src="./images/5078a1c3e7cdbaa62b51e190f4bd101e.webp" alt="مجالس">
-          </div>
+          <div class="image-container"><img src="./images/5078a1c3e7cdbaa62b51e190f4bd101e.webp" alt="مجلس"></div>
           <div class="card-body">
-            <span class="card-tag">مجالس رجال</span>
-            <h3 class="card-title">فخامة كلاسيكية</h3>
-            <p class="card-text">دمج الديكورات الجبسية مع الدهانات الفاخرة لتعطي طابع القصور والمجالس العربية الأصيلة.</p>
+            <span class="card-tag">مجالس</span>
+            <h3 class="card-title">مجلس كلاسيكي أنيق</h3>
+            <p class="card-text">دمج الديكورات الجبسية مع الدهانات لتعطي طابع الفخامة العربية الأصيلة.</p>
           </div>
         </div>
-
-        <!-- Card 4 -->
         <div class="gallery-card">
-          <div class="image-container">
-            <img src="./images/2c7fde3bd8bef9b9d7f6a1c29c17d7d1.webp" alt="مداخل">
-          </div>
+          <div class="image-container"><img src="./images/2c7fde3bd8bef9b9d7f6a1c29c17d7d1.webp" alt="مدخل"></div>
           <div class="card-body">
-            <span class="card-tag">مداخل وممرات</span>
+            <span class="card-tag">مداخل</span>
             <h3 class="card-title">تشطيب مداخل فاخرة</h3>
-            <p class="card-text">الاهتمام بأدق التفاصيل في مداخل المنازل لتعطي انطباعاً أولياً بالفخامة والجودة.</p>
+            <p class="card-text">دقة في التنفيذ تعطي انطباعاً أولياً بالفخامة لكل من يدخل منزلك.</p>
           </div>
         </div>
-
-        <!-- Card 5 -->
         <div class="gallery-card">
-          <div class="image-container">
-            <img src="./images/897ec8700d20334d82dec2ec03c54bc4.webp" alt="غرف نوم">
-          </div>
+          <div class="image-container"><img src="./images/897ec8700d20334d82dec2ec03c54bc4.webp" alt="غرفة نوم"></div>
           <div class="card-body">
             <span class="card-tag">غرف نوم</span>
-            <h3 class="card-title">ألوان دافئة ومودرن</h3>
-            <p class="card-text">تصميم ألوان غرف النوم بتناسق تام مع الإضاءة لخلق بيئة مريحة للنوم والاسترخاء.</p>
+            <h3 class="card-title">ألوان دافئة ومريحة</h3>
+            <p class="card-text">تناسق لوني تام يخلق بيئة مثالية للاسترخاء والراحة داخل غرف النوم.</p>
           </div>
         </div>
-
-        <!-- Card 6 -->
         <div class="gallery-card">
-          <div class="image-container">
-            <img src="./images/4a0a3851c360a9632c4aff21d26c1ede.webp" alt="ديكورات فوم">
-          </div>
+          <div class="image-container"><img src="./images/4a0a3851c360a9632c4aff21d26c1ede.webp" alt="ديكور فوم"></div>
           <div class="card-body">
-            <span class="card-tag">ديكورات داخلية</span>
-            <h3 class="card-title">إطارات فوم جدارية</h3>
-            <p class="card-text">تركيب إطارات الفوم العصرية مع دهانها بألوان متناسقة تضفي لمسة فنية فريدة للجدران.</p>
+            <span class="card-tag">ديكورات</span>
+            <h3 class="card-title">إطارات فوم عصرية</h3>
+            <p class="card-text">تركيب إطارات الفوم بدقة متناهية مع دهانها بألوان تتناسب مع ديكور منزلك.</p>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- الفوتر -->
     <footer class="footer-bg">
       <div class="footer-content">
         <div>
           <div class="footer-title">معلم دهانات مكة</div>
-          <p>أفضل معلم دهانات وإيبوكسي في مكة المكرمة. جودة مضمونة، أسعار منافسة، والتزام تام بالمواعيد.</p>
+          <p style="font-size: 0.9rem;">أفضل خدمات الدهانات والإيبوكسي في مكة المكرمة بجودة عالمية وأسعار منافسة.</p>
         </div>
         <div>
           <div class="footer-title">روابط سريعة</div>
@@ -351,23 +407,29 @@
             <li><a href="/epoxy">إيبوكسي</a></li>
           </ul>
         </div>
-        <div>
-          <div class="footer-title">تواصل معنا</div>
-          <p>مكة المكرمة، المملكة العربية السعودية</p>
-          <p>جوال: 0560703844</p>
-        </div>
       </div>
       <div class="copyright-bar">
-        © 2026 جميع الحقوق محفوظة - تم التطوير بواسطة <a href="https://nasharhub.com" style="color: white; text-decoration: none;">NasharHub.com</a>
+        © 2026 جميع الحقوق محفوظة - تطوير <a href="https://nasharhub.com" style="color: white; text-decoration: none;">NasharHub.com</a>
       </div>
     </footer>
 
-    <!-- زر واتساب -->
-    <a href="https://wa.me/966560703844" class="whatsapp-btn">
-      <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.981z"/></svg>
-    </a>
+    <!-- الأزرار العائمة المزدوجة -->
+    <div class="floating-actions">
+      <a href="tel:0560703844" class="floating-btn btn-call" title="اتصل بنا">
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      </a>
+      <a href="https://wa.me/966560703844" class="floating-btn btn-whatsapp" title="واتساب">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.981z"/></svg>
+      </a>
+    </div>
 
-    <!-- عنصر root فارغ لمنع تعارض React -->
+    <script>
+      function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+      }
+    </script>
+    
     <div id="root" style="display: none !important;"></div>
   </body>
 </html>
