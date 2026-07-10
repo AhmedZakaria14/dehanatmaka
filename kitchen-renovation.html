@@ -47,8 +47,9 @@
         z-index: 101;
       }
       
-      /* تم إخفاء الهيدر بناءً على طلب المستخدم */
+      /* إخفاء الهيدر والمينيو تماماً */
       header { display: none !important; }
+      .mobile-menu { display: none !important; }
 
       .btn-primary {
         background-color: hsl(var(--primary));
@@ -134,18 +135,11 @@
         width: 100%; padding: 0.8rem; border-radius: 0.75rem; border: 1px solid hsl(var(--border));
         font-family: 'Cairo', sans-serif; font-weight: 600; background-color: #f9f9f9;
       }
-      .color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
-      .color-option {
-        aspect-ratio: 1; border-radius: 0.5rem; cursor: pointer; border: 3px solid transparent;
-        transition: all 0.2s; position: relative;
-      }
-      .color-option.selected { border-color: hsl(var(--primary)); transform: scale(1.1); }
-      .color-option span { position: absolute; bottom: -18px; left: 0; width: 100%; font-size: 0.65rem; text-align: center; font-weight: 700; }
 
       /* Lightbox */
       .lightbox {
         display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; padding: 1rem;
+        background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; padding: 1rem;
       }
       .lightbox.active { display: flex; }
       .lightbox img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px; }
@@ -192,9 +186,6 @@
             <a href="#order-form" class="btn-primary" style="padding: 1.25rem 2.5rem; font-size: 1.25rem;">احجز خصمك الآن</a>
             <a href="#kitchen-results" class="px-8 py-4 rounded-full font-bold text-lg border-2 hover:bg-muted transition-all">شاهد النتائج قبل وبعد</a>
           </div>
-          <div class="mt-8">
-            <a href="index.html" style="color: #666; font-weight: bold; text-decoration: underline;">العودة للرئيسية</a>
-          </div>
         </div>
       </section>
 
@@ -217,7 +208,7 @@
         </div>
       </section>
 
-      <!-- Results Section (Previous Content Kept) -->
+      <!-- Results Section -->
       <section id="kitchen-results" style="background-color: #fcfcfc;">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-12" data-aos="fade-up">
@@ -225,6 +216,7 @@
             <p class="opacity-70">نماذج حقيقية توضح التحول الجذري لشكل المطبخ</p>
           </div>
           
+          <!-- Project 1 -->
           <div class="project-card" data-aos="fade-up">
             <div class="p-6 border-b"><h3 class="text-xl font-black">مطبخ 1 - تجديد اللون</h3></div>
             <div class="p-6">
@@ -240,7 +232,66 @@
               </div>
             </div>
           </div>
-          <!-- Additional projects omitted for brevity but preserved in file -->
+
+          <!-- Project 2 -->
+          <div class="project-card" data-aos="fade-up">
+            <div class="p-6 border-b"><h3 class="text-xl font-black">مطبخ 2 - دهان وتجديد</h3></div>
+            <div class="p-6">
+              <div class="before-after-grid">
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge">قبل</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595015/photo_5942535477263011648_y_t3vit4.jpg" alt="قبل">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595031/photo_5942535477263011646_y_rnw6jm.jpg" alt="بعد">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card" data-aos="fade-up">
+            <div class="p-6 border-b"><h3 class="text-xl font-black">مطبخ 3 - تغيير شامل</h3></div>
+            <div class="p-6">
+              <div class="before-after-grid">
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge">قبل</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595168/photo_5942535477263011664_y_hjllpv.jpg" alt="قبل">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595180/photo_5942535477263011667_y_jqtajv.jpg" alt="بعد">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Marble Results -->
+      <section id="marble-results">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl font-black mb-4">نتائج تجديد الرخام بالإيبوكسي</h2>
+            <p class="opacity-70">تحويل الرخام القديم والمستهلك إلى قطع فنية لامعة</p>
+          </div>
+          
+          <div class="project-card" data-aos="fade-up">
+            <div class="p-6 border-b"><h3 class="text-xl font-black">رخام مطبخ - تأثير رخامي فاخر</h3></div>
+            <div class="p-6">
+              <div class="before-after-grid">
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge">قبل</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595503/photo_5942535477263011661_y_f5r7gq.jpg" alt="قبل">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783595514/photo_5942535477263011662_y_n7eclj.jpg" alt="بعد">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -283,6 +334,11 @@
       </a>
     </div>
 
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="this.classList.remove('active')">
+      <img id="lightbox-img" src="" alt="Zoomed view">
+    </div>
+
     <footer>
       <p class="font-bold">معلم دهانات مكة - أبو كيان</p>
       <p class="text-sm opacity-60 mt-2">© 2026 جميع الحقوق محفوظة - تم التطوير بواسطة NasharHub.com</p>
@@ -291,6 +347,13 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({ duration: 800, once: true });
+      function openLightbox(container) {
+        const img = container.querySelector('img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      }
       function sendOrder() {
         const name = document.getElementById('cust-name').value;
         const service = document.getElementById('cust-service').value;
