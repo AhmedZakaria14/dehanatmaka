@@ -210,6 +210,24 @@ if (window.navigation && window.self !== window.top) {
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Force navigation for service pages to bypass React Router
+      document.addEventListener('click', function(e) {
+        const a = e.target.closest('a');
+        if (a && a.href) {
+          const url = new URL(a.href);
+          if (url.origin === window.location.origin) {
+            if (url.pathname.includes('interior-paints')) {
+              e.preventDefault();
+              window.location.href = 'interior-paints.html';
+            } else if (url.pathname.includes('kitchen-renovation')) {
+              e.preventDefault();
+              window.location.href = 'kitchen-renovation.html';
+            }
+          }
+        }
+      }, true);
+    </script>
     
   </body>
 </html>
