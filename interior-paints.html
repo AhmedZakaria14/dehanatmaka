@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>دهانات داخلية احترافية في مكة | معلم أبو كيان</title>
+    <title>معلم أبو كيان – دهانات داخلية في مكة</title>
     <meta name="description" content="أفضل معلم دهانات داخلية في مكة. تجديد جدران، أسقف، وديكورات فوم بأحدث الألوان. جودة مضمونة مع معلم أبو كيان." />
     <meta name="keywords" content="دهانات داخلية مكة, معلم دهانات مكة, دهانات أبو كيان, ترميم دهانات داخلية, ديكورات فوم مكة" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,79 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="assets/index-7b42601c.js"></script>
     <link rel="stylesheet" href="assets/index-f145d107.css">
+    <style>
+      /* استعادة وتعديل بعض الأنماط لتناسب المحتوى داخل الستايل الأصلي */
+      .interior-content {
+        padding: 100px 20px 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .interior-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 20px;
+        color: #1a1a1a;
+      }
+      .interior-desc {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 50px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+      }
+      .gallery-item {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+      }
+      .gallery-item:hover {
+        transform: translateY(-10px);
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+      .gallery-item-body {
+        padding: 20px;
+        text-align: right;
+      }
+      .gallery-item-title {
+        font-weight: 900;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+      .gallery-item-desc {
+        color: #777;
+        font-size: 0.9rem;
+      }
+      .contact-btn-fixed {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        background: #25d366;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-weight: 900;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+    </style>
     <script type="module">
 window.onerror = (message, source, lineno, colno, errorObj) => {
 	const errorDetails = errorObj ? JSON.stringify({
@@ -30,187 +103,77 @@ window.onerror = (message, source, lineno, colno, errorObj) => {
 	}, '*');
 };
 </script>
-    <script type="module">
-const observer = new MutationObserver((mutations) => {
-	for (const mutation of mutations) {
-		for (const addedNode of mutation.addedNodes) {
-			if (
-				addedNode.nodeType === Node.ELEMENT_NODE &&
-				(
-					addedNode.tagName?.toLowerCase() === 'vite-error-overlay' ||
-					addedNode.classList?.contains('backdrop')
-				)
-			) {
-				handleViteOverlay(addedNode);
-			}
-		}
-	}
-});
-
-observer.observe(document.documentElement, {
-	childList: true,
-	subtree: true
-});
-
-function handleViteOverlay(node) {
-	if (!node.shadowRoot) {
-		return;
-	}
-
-	const backdrop = node.shadowRoot.querySelector('.backdrop');
-
-	if (backdrop) {
-		const overlayHtml = backdrop.outerHTML;
-		const parser = new DOMParser();
-		const doc = parser.parseFromString(overlayHtml, 'text/html');
-		const messageBodyElement = doc.querySelector('.message-body');
-		const fileElement = doc.querySelector('.file');
-		const messageText = messageBodyElement ? messageBodyElement.textContent.trim() : '';
-		const fileText = fileElement ? fileElement.textContent.trim() : '';
-		const error = messageText + (fileText ? ' File:' + fileText : '');
-
-		window.parent.postMessage({
-			type: 'horizons-vite-error',
-			error,
-		}, '*');
-	}
-}
-</script>
-    <script type="module">
-const originalConsoleError = console.error;
-const MATCH_LINE_COL_REGEX = /:(\d+):(\d+)\)?\s*$/; // regex to match the :lineNum:colNum
-const MATCH_AT_REGEX = /^\s*at\s+(?:async\s+)?(?:.*?\s+)?\(?/; // regex to remove the 'at' keyword and any 'async' or function name
-const MATCH_PATH_REGEX = /^\//; // regex to remove the leading slash
-
-function parseStackFrameLine(line) {
-	const lineColMatch = line.match(MATCH_LINE_COL_REGEX);
-	if (!lineColMatch) return null;
-	const [, lineNum, colNum] = lineColMatch;
-	const suffix = `:${lineNum}:${colNum}`;
-	const idx = line.lastIndexOf(suffix);
-	if (idx === -1) return null;
-	const before = line.substring(0, idx);
-	const path = before.replace(MATCH_AT_REGEX, '').trim();
-	if (!path) return null;
-
-	try {
-		const pathname = new URL(path).pathname;
-		const filePath = pathname.replace(MATCH_PATH_REGEX, '') || pathname;
-		return `${filePath}:${lineNum}:${colNum}`;
-	} catch (e) {
-		const filePath = path.replace(MATCH_PATH_REGEX, '') || path;
-		return `${filePath}:${lineNum}:${colNum}`;
-	}
-}
-
-function getFilePathFromStack(stack, skipFrames = 0) {
-	if (!stack || typeof stack !== 'string') return null;
-	const lines = stack.split('\n').slice(1);
-
-	const frames = lines.map(line => parseStackFrameLine(line.replace(/\r$/, ''))).filter(Boolean);
-
-	return frames[skipFrames] ?? null;
-}
-
-console.error = function(...args) {
-	originalConsoleError.apply(console, args);
-
-	let errorString = '';
-	let filePath = null;
-
-	for (let i = 0; i < args.length; i++) {
-		const arg = args[i];
-		if (arg instanceof Error) {
-			filePath = getFilePathFromStack(arg.stack, 0);
-			errorString = `${arg.name}: ${arg.message}`;
-			if (filePath) {
-				errorString = `${errorString} at ${filePath}`;
-			}
-			break;
-		}
-	}
-
-	if (!errorString) {
-		errorString = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' ');
-		const stack = new Error().stack;
-		filePath = getFilePathFromStack(stack, 1);
-		if (filePath) {
-			errorString = `${errorString} at ${filePath}`;
-		}
-	}
-
-	window.parent.postMessage({
-		type: 'horizons-console-error',
-		error: errorString
-	}, '*');
-};
-</script>
-    <script type="module">
-const originalFetch = window.fetch;
-
-window.fetch = function(...args) {
-	const url = args[0] instanceof Request ? args[0].url : args[0];
-
-	// Skip WebSocket URLs
-	if (url.startsWith('ws:') || url.startsWith('wss:')) {
-		return originalFetch.apply(this, args);
-	}
-
-	return originalFetch.apply(this, args)
-		.then(async response => {
-			const contentType = response.headers.get('Content-Type') || '';
-
-			// Exclude HTML document responses
-			const isDocumentResponse =
-				contentType.includes('text/html') ||
-				contentType.includes('application/xhtml+xml');
-
-			if (!response.ok && !isDocumentResponse) {
-					const responseClone = response.clone();
-					const errorFromRes = await responseClone.text();
-					const requestUrl = response.url;
-					console.error(`Fetch error from ${requestUrl}: ${errorFromRes}`);
-			}
-
-			return response;
-		})
-		.catch(error => {
-			if (!url.match(/.html?$/i)) {
-				console.error(error);
-			}
-
-			throw error;
-		});
-};
-</script>
-    <script type="module">
-if (window.navigation && window.self !== window.top) {
-	window.navigation.addEventListener('navigate', (event) => {
-		const url = event.destination.url;
-
-		try {
-			const destinationUrl = new URL(url);
-			const destinationOrigin = destinationUrl.origin;
-			const currentOrigin = window.location.origin;
-
-			if (destinationOrigin === currentOrigin) {
-				return;
-			}
-		} catch (error) {
-			return;
-		}
-
-		window.parent.postMessage({
-			type: 'horizons-navigation-error',
-			url,
-		}, '*');
-	});
-}
-</script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- المحتوى الذي سيظهر فوق الستايل الأصلي للهيدر -->
+    <div class="interior-content">
+      <h1 class="interior-title">أعمال الدهانات الداخلية</h1>
+      <p class="interior-desc">نقدم لكم تشكيلة من أرقى أعمالنا في الدهانات الداخلية والديكورات في مكة المكرمة، حيث نجمع بين دقة التنفيذ وجمال الألوان.</p>
+      
+      <div class="gallery-grid">
+        <!-- العمل 1 -->
+        <div class="gallery-item">
+          <img src="./images/ccc06990cb98342aa9451c9ca5e5c43b.webp" alt="دهان صالة مودرن">
+          <div class="gallery-item-body">
+            <h3 class="gallery-item-title">صالة استقبال مودرن</h3>
+            <p class="gallery-item-desc">تنفيذ دهان أبيض ناصع مع إضاءة ليد مخفية تبرز جمال الزوايا والتشطيب.</p>
+          </div>
+        </div>
+
+        <!-- العمل 2 -->
+        <div class="gallery-item">
+          <img src="./images/f80add5e2472c679adf767df93a8e7cf.webp" alt="غرفة معيشة رمادي">
+          <div class="gallery-item-body">
+            <h3 class="gallery-item-title">غرفة معيشة هادئة</h3>
+            <p class="gallery-item-desc">استخدام تدرجات الرمادي الفاتح لمنح شعور بالاتساع والراحة النفسية.</p>
+          </div>
+        </div>
+
+        <!-- العمل 3 -->
+        <div class="gallery-item">
+          <img src="./images/5078a1c3e7cdbaa62b51e190f4bd101e.webp" alt="تصميم كلاسيكي">
+          <div class="gallery-item-body">
+            <h3 class="gallery-item-title">مجلس كلاسيكي</h3>
+            <p class="gallery-item-desc">دمج الديكورات الجبسية مع الدهانات الفاخرة لإعطاء طابع الفخامة العربية.</p>
+          </div>
+        </div>
+
+        <!-- العمل 4 -->
+        <div class="gallery-item">
+          <img src="./images/2c7fde3bd8bef9b9d7f6a1c29c17d7d1.webp" alt="صالة بيضاء">
+          <div class="gallery-item-body">
+            <h3 class="gallery-item-title">صالة واسعة</h3>
+            <p class="gallery-item-desc">تشطيب نهائي عالي الجودة يعكس الإضاءة الطبيعية بشكل مثالي.</p>
+          </div>
+        </div>
+
+        <!-- العمل 5 -->
+        <div class="gallery-item">
+          <img src="./images/897ec8700d20334d82dec2ec03c54bc4.webp" alt="غرفة نوم مودرن">
+          <div class="gallery-item-body">
+            <h3 class="gallery-item-title">غرفة نوم عصرية</h3>
+            <p class="gallery-item-desc">ألوان دافئة وتناسق تام بين الجدران والأرضيات بلمسات احترافية.</p>
+          </div>
+        </div>
+
+        <!-- العمل 6 -->
+        <div class="gallery-item">
+          <img src="./images/4a0a3851c360a9632c4aff21d26c1ede.webp" alt="لمسات ديكور">
+          <div class="gallery-item-body">
+            <h3 class="gallery-item-title">ديكورات جدارية</h3>
+            <p class="gallery-item-desc">تنفيذ إطارات فوم ودهانات متميزة تضفي لمسة فنية فريدة للمنزل.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://wa.me/966560703844" class="contact-btn-fixed">
+      <span>تواصل معنا عبر واتساب</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.981z"/></svg>
+    </a>
     
-<script>(function(){function e(){const e=document.querySelectorAll("a");e.forEach(e=>{const t=e.textContent.trim(),n=e.getAttribute("href");t.includes("دهانات داخلية")&&n&&n.includes("kitchen-renovation")&&e.setAttribute("href","interior-paints.html"),t.includes("تجديد المطابخ")&&n&&!n.includes("kitchen-renovation")&&e.setAttribute("href","kitchen-renovation.html")})}e();const t=new MutationObserver(t=>{e()});t.observe(document.body,{childList:!0,subtree:!0}),document.addEventListener("click",function(e){const t=e.target.closest("a");if(t){const n=t.textContent.trim();n.includes("دهانات داخلية")&&(window.location.href="interior-paints.html",e.preventDefault(),e.stopPropagation())}},!0)})();</script>
+    <script>(function(){function e(){const e=document.querySelectorAll("a");e.forEach(e=>{const t=e.textContent.trim(),n=e.getAttribute("href");t.includes("دهانات داخلية")&&n&&n.includes("kitchen-renovation")&&e.setAttribute("href","interior-paints.html"),t.includes("تجديد المطابخ")&&n&&!n.includes("kitchen-renovation")&&e.setAttribute("href","kitchen-renovation.html")})}e();const t=new MutationObserver(t=>{e()});t.observe(document.body,{childList:!0,subtree:!0}),document.addEventListener("click",function(e){const t=e.target.closest("a");if(t){const n=t.textContent.trim();n.includes("دهانات داخلية")&&(window.location.href="interior-paints.html",e.preventDefault(),e.stopPropagation())}},!0)})();</script>
   </body>
 </html>
