@@ -211,5 +211,6 @@ if (window.navigation && window.self !== window.top) {
   <body>
     <div id="root"></div>
     
+<script>document.addEventListener("click",function(e){const t=e.target.closest("a");if(t&&t.getAttribute("href")){const n=t.getAttribute("href");if(n.includes("kitchen-renovation")||n.includes("interior-paints")||n.includes("epoxy")||n.includes("exterior-paints")){e.preventDefault(),e.stopPropagation();let t=n;n.includes("kitchen-renovation")?t="kitchen-renovation.html":n.includes("interior-paints")?t="interior-paints.html":n.includes("epoxy")?t="epoxy.html":n.includes("exterior-paints")&&(t="exterior-paints.html"),window.location.href=t}}},!0);</script>
   </body>
 </html>
