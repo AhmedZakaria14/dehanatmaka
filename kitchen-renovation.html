@@ -503,5 +503,6 @@
         document.body.style.overflow = 'auto';
       }
     </script>
+<script>document.addEventListener("click", function(e) { let anchor = e.target.closest("a"); if (anchor && anchor.getAttribute("href") && anchor.getAttribute("href").includes("contact")) { window.location.href = "index.html#contact"; e.preventDefault(); } });</script>
   </body>
 </html>
