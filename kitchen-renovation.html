@@ -90,6 +90,9 @@
       /* Grid and Cards */
       .before-after-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
       @media (min-width: 768px) { .before-after-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+      
+      .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      @media (min-width: 768px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
 
       .project-card {
         border: 1px solid hsl(var(--border));
@@ -277,17 +280,71 @@
             <p class="opacity-70">تحويل الرخام القديم والمستهلك إلى قطع فنية لامعة</p>
           </div>
           
+          <!-- Marble Project 1 -->
           <div class="project-card" data-aos="fade-up">
-            <div class="p-6 border-b"><h3 class="text-xl font-black">رخام مطبخ - تأثير رخامي فاخر</h3></div>
+            <div class="p-6 border-b"><h3 class="text-xl font-black">تجديد الرخام - نموذج 1</h3></div>
             <div class="p-6">
-              <div class="before-after-grid">
+              <p class="font-bold mb-4">الحالة قبل التجديد:</p>
+              <div class="before-after-grid mb-6">
                 <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge">قبل</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738595503/photo_5942535477263011661_y_f5r7gq.jpg" alt="قبل">
+                  <span class="label-badge">قبل (1)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598229/photo_5942535477263011651_y_coprxf.jpg" alt="قبل">
                 </div>
                 <div class="img-container" onclick="openLightbox(this)">
-                  <span class="label-badge label-after">بعد</span>
-                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738595514/photo_5942535477263011662_y_n7eclj.jpg" alt="بعد">
+                  <span class="label-badge">قبل (2)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598230/photo_5942535477263011652_y_nviyrp.jpg" alt="قبل">
+                </div>
+              </div>
+              <p class="font-bold mb-4">النتيجة النهائية الفاخرة:</p>
+              <div class="gallery-grid">
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد (1)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598260/photo_5942535477263011653_y_c0sxy3.jpg" alt="بعد">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد (2)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598253/photo_5942535477263011654_y_rc0bly.jpg" alt="بعد">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد (3)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598253/photo_5942535477263011655_y_xoqpyc.jpg" alt="بعد">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Marble Project 2 -->
+          <div class="project-card" data-aos="fade-up">
+            <div class="p-6 border-b"><h3 class="text-xl font-black">تجديد الرخام - نموذج 2</h3></div>
+            <div class="p-6">
+              <p class="font-bold mb-4">الحالة قبل التجديد:</p>
+              <div class="before-after-grid mb-6">
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge">قبل (1)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598336/photo_5942535477263011657_y_htb0wp.jpg" alt="قبل">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge">قبل (2)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598337/photo_5942535477263011658_y_sloj2l.jpg" alt="قبل">
+                </div>
+              </div>
+              <p class="font-bold mb-4">النتيجة النهائية الفاخرة:</p>
+              <div class="gallery-grid">
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد (1)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598593/photo_5942535477263011659_y_dzbafx.jpg" alt="بعد">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد (2)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598592/photo_5942535477263011660_y_qskqas.jpg" alt="بعد">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد (3)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598593/photo_5942535477263011661_y_wewnah.jpg" alt="بعد">
+                </div>
+                <div class="img-container" onclick="openLightbox(this)">
+                  <span class="label-badge label-after">بعد (4)</span>
+                  <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1783598595/photo_5942535477263011662_y_c1w1qq.jpg" alt="بعد">
                 </div>
               </div>
             </div>
