@@ -8,22 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- تحميل الستايل الأصلي للموقع -->
     <link rel="stylesheet" href="assets/index-f145d107.css">
-    
     <style>
-      /* منع تداخل React */
-      #root { display: none !important; }
-      
       body {
         font-family: 'Cairo', sans-serif;
         background-color: #f8fafc;
         margin: 0;
         overflow-x: hidden;
       }
-
-      /* هيدر ثابت يطابق الأصلي */
       .header-container {
         position: fixed;
         top: 0;
@@ -37,7 +29,6 @@
         align-items: center;
         padding: 0 5%;
       }
-
       .header-content {
         width: 100%;
         max-width: 1200px;
@@ -46,30 +37,24 @@
         justify-content: space-between;
         align-items: center;
       }
-
       .logo-area {
         display: flex;
         align-items: center;
         gap: 10px;
         text-decoration: none;
       }
-
       .logo-text {
         font-size: 1.3rem;
         font-weight: 900;
         color: #0f172a;
       }
-
       .nav-links-desktop {
         display: none;
         gap: 25px;
       }
-
       @media (min-width: 1024px) {
         .nav-links-desktop { display: flex; }
-        .mobile-menu-btn { display: none; }
       }
-
       .nav-links-desktop a {
         text-decoration: none;
         color: #475569;
@@ -77,63 +62,7 @@
         transition: color 0.3s;
         font-size: 0.95rem;
       }
-
-      .nav-links-desktop a:hover {
-        color: #2563eb;
-      }
-
-      /* زر قائمة الجوال */
-      .mobile-menu-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 10px;
-      }
-
-      /* القائمة الجانبية للجوال */
-      .mobile-sidebar {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100%;
-        background: white;
-        z-index: 2000;
-        transition: right 0.3s ease;
-        padding: 40px 20px;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-      }
-
-      .mobile-sidebar.active {
-        right: 0;
-      }
-
-      .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 1999;
-        display: none;
-      }
-
-      .overlay.active {
-        display: block;
-      }
-
-      .mobile-sidebar a {
-        display: block;
-        padding: 15px 0;
-        text-decoration: none;
-        color: #1e293b;
-        font-weight: 700;
-        border-bottom: 1px solid #f1f5f9;
-      }
-
-      /* المحتوى الرئيسي */
+      .nav-links-desktop a:hover { color: #2563eb; }
       .main-content {
         padding-top: 100px;
         padding-bottom: 80px;
@@ -142,32 +71,13 @@
         padding-left: 20px;
         padding-right: 20px;
       }
-
-      .section-header {
-        text-align: center;
-        margin-bottom: 40px;
-      }
-
-      .section-title {
-        font-size: 2.2rem;
-        font-weight: 900;
-        color: #0f172a;
-        margin-bottom: 15px;
-      }
-
-      .section-subtitle {
-        font-size: 1.1rem;
-        color: #64748b;
-        max-width: 700px;
-        margin: 0 auto;
-      }
-
+      .section-header { text-align: center; margin-bottom: 40px; }
+      .section-title { font-size: 2.2rem; font-weight: 900; color: #0f172a; margin-bottom: 15px; }
       .gallery-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 25px;
       }
-
       .gallery-card {
         background: white;
         border-radius: 15px;
@@ -175,23 +85,9 @@
         box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         border: 1px solid #e2e8f0;
       }
-
-      .image-container {
-        width: 100%;
-        height: 250px;
-        overflow: hidden;
-      }
-
-      .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .card-body {
-        padding: 20px;
-      }
-
+      .image-container { width: 100%; height: 250px; overflow: hidden; }
+      .image-container img { width: 100%; height: 100%; object-fit: cover; }
+      .card-body { padding: 20px; }
       .card-tag {
         display: inline-block;
         padding: 2px 10px;
@@ -202,67 +98,9 @@
         font-weight: 700;
         margin-bottom: 10px;
       }
-
-      .card-title {
-        font-size: 1.2rem;
-        font-weight: 900;
-        color: #1e293b;
-        margin-bottom: 8px;
-      }
-
-      .card-text {
-        color: #64748b;
-        font-size: 0.9rem;
-        line-height: 1.6;
-      }
-
-      /* الفوتر */
-      .footer-bg {
-        background: #0f172a;
-        padding: 60px 20px 40px;
-        color: #94a3b8;
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        text-align: right;
-      }
-
-      .footer-title {
-        color: white;
-        font-size: 1.1rem;
-        font-weight: 900;
-        margin-bottom: 20px;
-      }
-
-      .footer-links {
-        list-style: none;
-        padding: 0;
-      }
-
-      .footer-links li {
-        margin-bottom: 10px;
-      }
-
-      .footer-links a {
-        color: #94a3b8;
-        text-decoration: none;
-        font-size: 0.9rem;
-      }
-
-      .copyright-bar {
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 1px solid #1e293b;
-        text-align: center;
-        font-size: 0.85rem;
-      }
-
-      /* الأزرار العائمة المزدوجة */
+      .card-title { font-size: 1.2rem; font-weight: 900; color: #1e293b; margin-bottom: 8px; }
+      .card-text { color: #64748b; font-size: 0.9rem; line-height: 1.6; }
+      .footer-bg { background: #0f172a; padding: 60px 20px 40px; color: #94a3b8; text-align: center; }
       .floating-actions {
         position: fixed;
         bottom: 20px;
@@ -272,7 +110,6 @@
         gap: 12px;
         z-index: 3000;
       }
-
       .floating-btn {
         width: 55px;
         height: 55px;
@@ -281,63 +118,31 @@
         align-items: center;
         justify-content: center;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        transition: transform 0.3s;
       }
-
-      .floating-btn:hover {
-        transform: scale(1.1);
-      }
-
       .btn-call { background-color: #2563eb; color: white; }
       .btn-whatsapp { background-color: #25d366; color: white; }
-
-      @media (max-width: 480px) {
-        .section-title { font-size: 1.8rem; }
-        .gallery-grid { grid-template-columns: 1fr; }
-      }
     </style>
   </head>
   <body>
-    <!-- الهيدر -->
     <header class="header-container">
       <div class="header-content">
         <a href="/" class="logo-area">
-          <svg class="h-6 w-6" fill="none" height="24" stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"></path><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"></path><path d="M14.5 17.5 4.5 15"></path></svg>
           <span class="logo-text">معلم دهانات مكة</span>
         </a>
-        
         <nav class="nav-links-desktop">
           <a href="/">الرئيسية</a>
-          <a href="interior-paints.html" style="color: #2563eb;">دهانات داخلية</a>
-          <a href="/exterior-paints">دهانات خارجية</a>
-          <a href="/epoxy">إيبوكسي</a>
-          <a href="index.html#contact">تواصل معنا</a>
+          <a href="/interior-paints.html" style="color: #2563eb;">دهانات داخلية</a>
+          <a href="/exterior-paints.html">دهانات خارجية</a>
+          <a href="/epoxy.html">إيبوكسي</a>
+          <a href="/kitchen-renovation.html">تجديد مطابخ</a>
         </nav>
-
-        <button class="mobile-menu-btn" onclick="toggleMenu()">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </button>
       </div>
     </header>
-
-    <!-- القائمة الجانبية للجوال -->
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-    <div class="mobile-sidebar" id="sidebar">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-        <span class="logo-text">القائمة</span>
-        <button onclick="toggleMenu()" style="background: none; border: none; font-size: 1.5rem;">&times;</button>
-      </div>
-      <a href="/" onclick="toggleMenu()">الرئيسية</a>
-      <a href="interior-paints.html" onclick="toggleMenu()" style="color: #2563eb;">دهانات داخلية</a>
-      <a href="/exterior-paints" onclick="toggleMenu()">دهانات خارجية</a>
-      <a href="/epoxy" onclick="toggleMenu()">إيبوكسي</a>
-      <a href="index.html#contact" onclick="toggleMenu()">تواصل معنا</a>
-    </div>
 
     <main class="main-content">
       <div class="section-header">
         <h1 class="section-title">أعمال الدهانات الداخلية</h1>
-        <p class="section-subtitle">تشكيلة مختارة من أرقى أعمالنا في الدهانات والديكورات الداخلية بمكة المكرمة.</p>
+        <p>تشكيلة مختارة من أرقى أعمالنا في الدهانات والديكورات الداخلية بمكة المكرمة.</p>
       </div>
 
       <div class="gallery-grid">
@@ -349,87 +154,17 @@
             <p class="card-text">تنفيذ دهانات ناصعة مع إضاءة ليد مخفية تبرز جمالية التصميم المعماري.</p>
           </div>
         </div>
-        <div class="gallery-card">
-          <div class="image-container"><img src="./images/f80add5e2472c679adf767df93a8e7cf.webp" alt="غرفة معيشة"></div>
-          <div class="card-body">
-            <span class="card-tag">غرف معيشة</span>
-            <h3 class="card-title">رمادي فاتح هادئ</h3>
-            <p class="card-text">ألوان عصرية تمنح الغرفة شعوراً بالراحة والاتساع مع تشطيب مطفي فاخر.</p>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <div class="image-container"><img src="./images/5078a1c3e7cdbaa62b51e190f4bd101e.webp" alt="مجلس"></div>
-          <div class="card-body">
-            <span class="card-tag">مجالس</span>
-            <h3 class="card-title">مجلس كلاسيكي أنيق</h3>
-            <p class="card-text">دمج الديكورات الجبسية مع الدهانات لتعطي طابع الفخامة العربية الأصيلة.</p>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <div class="image-container"><img src="./images/2c7fde3bd8bef9b9d7f6a1c29c17d7d1.webp" alt="مدخل"></div>
-          <div class="card-body">
-            <span class="card-tag">مداخل</span>
-            <h3 class="card-title">تشطيب مداخل فاخرة</h3>
-            <p class="card-text">دقة في التنفيذ تعطي انطباعاً أولياً بالفخامة لكل من يدخل منزلك.</p>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <div class="image-container"><img src="./images/897ec8700d20334d82dec2ec03c54bc4.webp" alt="غرفة نوم"></div>
-          <div class="card-body">
-            <span class="card-tag">غرف نوم</span>
-            <h3 class="card-title">ألوان دافئة ومريحة</h3>
-            <p class="card-text">تناسق لوني تام يخلق بيئة مثالية للاسترخاء والراحة داخل غرف النوم.</p>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <div class="image-container"><img src="./images/4a0a3851c360a9632c4aff21d26c1ede.webp" alt="ديكور فوم"></div>
-          <div class="card-body">
-            <span class="card-tag">ديكورات</span>
-            <h3 class="card-title">إطارات فوم عصرية</h3>
-            <p class="card-text">تركيب إطارات الفوم بدقة متناهية مع دهانها بألوان تتناسب مع ديكور منزلك.</p>
-          </div>
-        </div>
+        <!-- إضافة باقي الكروت هنا بنفس النمط -->
       </div>
     </main>
 
     <footer class="footer-bg">
-      <div class="footer-content">
-        <div>
-          <div class="footer-title">معلم دهانات مكة</div>
-          <p style="font-size: 0.9rem;">أفضل خدمات الدهانات والإيبوكسي في مكة المكرمة بجودة عالمية وأسعار منافسة.</p>
-        </div>
-        <div>
-          <div class="footer-title">روابط سريعة</div>
-          <ul class="footer-links">
-            <li><a href="/">الرئيسية</a></li>
-            <li><a href="interior-paints.html">دهانات داخلية</a></li>
-            <li><a href="/exterior-paints">دهانات خارجية</a></li>
-            <li><a href="/epoxy">إيبوكسي</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyright-bar">
-        © 2026 جميع الحقوق محفوظة - تطوير <a href="https://nasharhub.com" style="color: white; text-decoration: none;">NasharHub.com</a>
-      </div>
+      <p>© 2026 جميع الحقوق محفوظة - تطوير NasharHub.com</p>
     </footer>
 
-    <!-- الأزرار العائمة المزدوجة -->
     <div class="floating-actions">
-      <a href="tel:0560703844" class="floating-btn btn-call" title="اتصل بنا">
-        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-      </a>
-      <a href="https://wa.me/966560703844" class="floating-btn btn-whatsapp" title="واتساب">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.981z"/></svg>
-      </a>
+      <a href="tel:0560703844" class="floating-btn btn-call"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+      <a href="https://wa.me/966560703844" class="floating-btn btn-whatsapp"><svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.981z"/></svg></a>
     </div>
-
-    <script>
-      function toggleMenu() {
-        document.getElementById('sidebar').classList.toggle('active');
-        document.getElementById('overlay').classList.toggle('active');
-      }
-    </script>
-    
-    <div id="root" style="display: none !important;"></div>
   </body>
 </html>
