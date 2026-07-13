@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>تجديد وتغيير لون المطابخ في مكة | خصم 15% لفترة محدودة</title>
     <meta name="description" content="جدد شكل مطبخك من خلال تغيير لون الدواليب وتجديد رخام المطبخ بمادة الإيبوكسي في مكة. شاهد نماذج حقيقية قبل وبعد." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://www.dehanatmaka.com/kitchen-renovation" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/index-f145d107.css">
-    <!-- AOS Library for Scroll Animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script defer src="/assets/kitchen.js"></script>
     <style>
       :root {
         --primary: 47.9 95.8% 58.2%;
@@ -47,9 +49,26 @@
         z-index: 101;
       }
       
-      /* إظهار الهيدر والقائمة لضمان تجربة مستخدم كاملة وشفافة */
-      header { display: block; }
-      .mobile-menu { display: block; }
+      .site-header {
+        background: #111827;
+        color: white;
+        padding: 0.9rem 1rem;
+      }
+      .site-header-inner {
+        max-width: 72rem;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .site-header-actions { display: flex; align-items: center; gap: 0.75rem; }
+      .site-header a { color: white; font-weight: 800; }
+      .site-header .whatsapp-link { color: #111827; background: #fbbf24; padding: 0.55rem 1rem; border-radius: 9999px; }
+      @media (max-width: 560px) {
+        .site-header-inner { flex-direction: column; text-align: center; }
+        .site-header-actions { flex-wrap: wrap; justify-content: center; }
+      }
 
       .btn-primary {
         background-color: hsl(var(--primary));
@@ -104,7 +123,17 @@
       }
       .project-card:hover { transform: translateY(-5px); }
       
-      .img-container { position: relative; aspect-ratio: 4/3; cursor: zoom-in; overflow: hidden; background-color: #f3f4f6; }
+      .img-container {
+        position: relative;
+        aspect-ratio: 4/3;
+        cursor: zoom-in;
+        overflow: hidden;
+        background-color: #f3f4f6;
+        border: 0;
+        padding: 0;
+        width: 100%;
+        font: inherit;
+      }
       .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
       .img-container:hover img { transform: scale(1.05); }
 
@@ -132,12 +161,9 @@
         margin: 2rem auto 0;
         box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
       }
-      .form-group { margin-bottom: 1.25rem; text-align: right; }
-      .form-label { display: block; font-weight: 800; margin-bottom: 0.5rem; }
-      .form-select, .form-input {
-        width: 100%; padding: 0.8rem; border-radius: 0.75rem; border: 1px solid hsl(var(--border));
-        font-family: 'Cairo', sans-serif; font-weight: 600; background-color: #f9f9f9;
-      }
+      .contact-actions { display: grid; gap: 0.75rem; margin-top: 1.5rem; }
+      .contact-actions a { width: 100%; }
+      .contact-note { font-size: 0.9rem; color: #4b5563; margin-top: 1rem; }
 
       /* Lightbox */
       .lightbox {
@@ -178,10 +204,20 @@
     <!-- Discount Banner -->
     <div class="discount-banner">🔥 عرض خاص: خصم 15% على جميع خدمات تجديد المطابخ لفترة محدودة!</div>
 
+    <header class="site-header">
+      <div class="site-header-inner">
+        <strong>معلم دهانات مكة - أبو كيان</strong>
+        <nav class="site-header-actions" aria-label="التواصل">
+          <a href="tel:0560703844">اتصال: 0560703844</a>
+          <a class="whatsapp-link" href="https://wa.me/966560703844" target="_blank" rel="noopener noreferrer">واتساب</a>
+        </nav>
+      </div>
+    </header>
+
     <main>
       <!-- Hero -->
       <section class="hero-section">
-        <div class="max-w-4xl mx-auto" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto">
           <div class="discount-badge">خصم 15% لفترة محدودة</div>
           <h1 class="hero-title">تغيير لون دواليب ورخام المطابخ في مكة</h1>
           <p class="text-xl md:text-2xl mb-10 opacity-80">جدد شكل مطبخك من خلال تغيير لون الدواليب وتجديد الرخام بمادة الإيبوكسي، وشاهد نماذج حقيقية للنتائج قبل وبعد.</p>
@@ -194,17 +230,17 @@
 
       <!-- Services -->
       <section class="max-w-6xl mx-auto py-12">
-        <h2 class="text-3xl font-black text-center mb-12" data-aos="fade-up">خدماتنا المتميزة</h2>
+        <h2 class="text-3xl font-black text-center mb-12">خدماتنا المتميزة</h2>
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="p-8 border rounded-2xl bg-card text-center" data-aos="fade-up">
+          <div class="p-8 border rounded-2xl bg-card text-center">
             <h3 class="text-xl font-bold mb-4">تغيير لون الدواليب</h3>
             <p class="opacity-70">دهان وتجديد دواليب المطبخ بألوان عصرية وجودة عالية تدوم طويلاً.</p>
           </div>
-          <div class="p-8 border rounded-2xl bg-card text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="p-8 border rounded-2xl bg-card text-center">
             <h3 class="text-xl font-bold mb-4">تجديد الرخام بالإيبوكسي</h3>
             <p class="opacity-70">تغيير شكل رخام المطبخ بمادة الإيبوكسي المقاومة للحرارة والزيوت.</p>
           </div>
-          <div class="p-8 border rounded-2xl bg-card text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="p-8 border rounded-2xl bg-card text-center">
             <h3 class="text-xl font-bold mb-4">تجديد شامل</h3>
             <p class="opacity-70">خدمة متكاملة تشمل تجديد الدواليب والرخام ليعود مطبخك كالجديد تماماً.</p>
           </div>
@@ -214,58 +250,58 @@
       <!-- Results Section -->
       <section id="kitchen-results" style="background-color: #fcfcfc;">
         <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-12" data-aos="fade-up">
+          <div class="text-center mb-12">
             <h2 class="text-3xl font-black mb-4">نتائج تغيير لون دواليب المطابخ</h2>
             <p class="opacity-70">نماذج حقيقية توضح التحول الجذري لشكل المطبخ</p>
           </div>
           
           <!-- Project 1 -->
-          <div class="project-card" data-aos="fade-up">
+          <div class="project-card">
             <div class="p-6 border-b"><h3 class="text-xl font-black">مطبخ 1 - تجديد اللون</h3></div>
             <div class="p-6">
               <div class="before-after-grid">
-                <div class="img-container" onclick="openLightbox(this)">
+                <button type="button" class="img-container">
                   <span class="label-badge">قبل</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738593886/kitchen-color-after-01.webp" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738593363/kitchen-color-before-01.webp" alt="بعد">
-                </div>
+                </button>
               </div>
             </div>
           </div>
 
           <!-- Project 2 -->
-          <div class="project-card" data-aos="fade-up">
+          <div class="project-card">
             <div class="p-6 border-b"><h3 class="text-xl font-black">مطبخ 2 - دهان وتجديد</h3></div>
             <div class="p-6">
               <div class="before-after-grid">
-                <div class="img-container" onclick="openLightbox(this)">
+                <button type="button" class="img-container">
                   <span class="label-badge">قبل</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738595015/photo_5942535477263011648_y_t3vit4.jpg" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738595031/photo_5942535477263011646_y_rnw6jm.jpg" alt="بعد">
-                </div>
+                </button>
               </div>
             </div>
           </div>
 
           <!-- Project 3 -->
-          <div class="project-card" data-aos="fade-up">
+          <div class="project-card">
             <div class="p-6 border-b"><h3 class="text-xl font-black">مطبخ 3 - تغيير شامل</h3></div>
             <div class="p-6">
               <div class="before-after-grid">
-                <div class="img-container" onclick="openLightbox(this)">
+                <button type="button" class="img-container">
                   <span class="label-badge">قبل</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738595168/photo_5942535477263011664_y_hjllpv.jpg" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738595180/photo_5942535477263011667_y_jqtajv.jpg" alt="بعد">
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -275,77 +311,77 @@
       <!-- Marble Results -->
       <section id="marble-results">
         <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-12" data-aos="fade-up">
+          <div class="text-center mb-12">
             <h2 class="text-3xl font-black mb-4">نتائج تجديد الرخام بالإيبوكسي</h2>
             <p class="opacity-70">تحويل الرخام القديم والمستهلك إلى قطع فنية لامعة</p>
           </div>
           
           <!-- Marble Project 1 -->
-          <div class="project-card" data-aos="fade-up">
+          <div class="project-card">
             <div class="p-6 border-b"><h3 class="text-xl font-black">تجديد الرخام - نموذج 1</h3></div>
             <div class="p-6">
               <p class="font-bold mb-4">الحالة قبل التجديد:</p>
               <div class="before-after-grid mb-6">
-                <div class="img-container" onclick="openLightbox(this)">
+                <button type="button" class="img-container">
                   <span class="label-badge">قبل (1)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598229/photo_5942535477263011651_y_coprxf.jpg" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge">قبل (2)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598230/photo_5942535477263011652_y_nviyrp.jpg" alt="قبل">
-                </div>
+                </button>
               </div>
               <p class="font-bold mb-4">النتيجة النهائية الفاخرة:</p>
               <div class="gallery-grid">
-                <div class="img-container" onclick="openLightbox(this)">
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد (1)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598260/photo_5942535477263011653_y_c0sxy3.jpg" alt="بعد">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد (2)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598253/photo_5942535477263011654_y_rc0bly.jpg" alt="بعد">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد (3)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598253/photo_5942535477263011655_y_xoqpyc.jpg" alt="بعد">
-                </div>
+                </button>
               </div>
             </div>
           </div>
 
           <!-- Marble Project 2 -->
-          <div class="project-card" data-aos="fade-up">
+          <div class="project-card">
             <div class="p-6 border-b"><h3 class="text-xl font-black">تجديد الرخام - نموذج 2</h3></div>
             <div class="p-6">
               <p class="font-bold mb-4">الحالة قبل التجديد:</p>
               <div class="before-after-grid mb-6">
-                <div class="img-container" onclick="openLightbox(this)">
+                <button type="button" class="img-container">
                   <span class="label-badge">قبل (1)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598336/photo_5942535477263011657_y_htb0wp.jpg" alt="قبل">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge">قبل (2)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598337/photo_5942535477263011658_y_sloj2l.jpg" alt="قبل">
-                </div>
+                </button>
               </div>
               <p class="font-bold mb-4">النتيجة النهائية الفاخرة:</p>
               <div class="gallery-grid">
-                <div class="img-container" onclick="openLightbox(this)">
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد (1)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598593/photo_5942535477263011659_y_dzbafx.jpg" alt="بعد">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد (2)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598592/photo_5942535477263011660_y_qskqas.jpg" alt="بعد">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد (3)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598593/photo_5942535477263011661_y_wewnah.jpg" alt="بعد">
-                </div>
-                <div class="img-container" onclick="openLightbox(this)">
+                </button>
+                <button type="button" class="img-container">
                   <span class="label-badge label-after">بعد (4)</span>
                   <img src="https://res.cloudinary.com/dxvjqrb9l/image/upload/v1738598595/photo_5942535477263011662_y_c1w1qq.jpg" alt="بعد">
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -356,26 +392,16 @@
       <section id="order-form" class="bg-muted/30">
         <div class="max-w-4xl mx-auto text-center">
           <h2 class="text-3xl font-black mb-4">احجز موعدك الآن</h2>
-          <p class="opacity-70 mb-8">املأ البيانات وسنتواصل معك لتحديد موعد المعاينة المجانية</p>
+          <p class="opacity-70 mb-8">تواصل معنا مباشرةً لتحديد موعد المعاينة المجانية</p>
           
           <div class="order-form-container">
-            <div class="form-group">
-              <label class="form-label">الاسم</label>
-              <input type="text" id="cust-name" class="form-input" placeholder="مثال: أحمد محمد">
+            <h3 class="text-xl font-black">تواصل مباشرةً لحجز المعاينة</h3>
+            <p class="opacity-70 mt-2">الخدمة متاحة داخل مكة المكرمة لتجديد الدواليب والرخام بالإيبوكسي.</p>
+            <div class="contact-actions">
+              <a href="https://wa.me/966560703844?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D9%85%D8%B9%D8%A7%D9%8A%D9%86%D8%A9%20%D9%84%D8%AA%D8%AC%D8%AF%D9%8A%D8%AF%20%D8%A7%D9%84%D9%85%D8%B7%D8%A8%D8%AE." target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size: 1.2rem;">إرسال الطلب عبر واتساب</a>
+              <a href="tel:0560703844" class="px-8 py-4 rounded-full font-bold text-lg border-2">اتصل الآن: 0560703844</a>
             </div>
-            <div class="form-group">
-              <label class="form-label">رقم الجوال</label>
-              <input type="tel" id="cust-phone" class="form-input" placeholder="05xxxxxxxx">
-            </div>
-            <div class="form-group">
-              <label class="form-label">الخدمة المطلوبة</label>
-              <select id="cust-service" class="form-select">
-                <option>تغيير لون الدواليب</option>
-                <option>تجديد الرخام بالإيبوكسي</option>
-                <option>تجديد شامل (دواليب + رخام)</option>
-              </select>
-            </div>
-            <button onclick="sendOrder()" class="btn-primary w-full mt-4" style="font-size: 1.2rem;">إرسال الطلب عبر واتساب</button>
+            <p class="contact-note">لن تُجمع أي بيانات شخصية داخل الموقع؛ سيتم التواصل من خلال واتساب أو الاتصال فقط.</p>
           </div>
         </div>
       </section>
@@ -383,40 +409,22 @@
 
     <!-- Floating Buttons -->
     <div class="floating-call-btns">
-      <a href="tel:0560703844" class="f-btn f-phone">
+      <a href="tel:0560703844" class="f-btn f-phone" aria-label="اتصل الآن">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
       </a>
-      <a href="https://wa.me/966560703844" class="f-btn f-whatsapp">
+      <a href="https://wa.me/966560703844" target="_blank" rel="noopener noreferrer" class="f-btn f-whatsapp" aria-label="تواصل عبر واتساب">
         <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.981z"/></svg>
       </a>
     </div>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" onclick="this.classList.remove('active')">
-      <img id="lightbox-img" src="" alt="Zoomed view">
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="عرض الصورة بحجم كبير">
+      <img id="lightbox-img" src="favicon.svg" alt="عرض الصورة بحجم كبير">
     </div>
 
     <footer>
       <p class="font-bold">معلم دهانات مكة - أبو كيان</p>
-      <p class="text-sm opacity-60 mt-2">© 2026 جميع الحقوق محفوظة - تم التطوير بواسطة <a href="https://nasharhub.com" target="_blank" style="color: inherit; text-decoration: underline;">NasharHub.com</a></p>
+      <p class="text-sm opacity-60 mt-2">© 2026 جميع الحقوق محفوظة | للتواصل: 0560703844</p>
     </footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({ duration: 800, once: true });
-      function openLightbox(container) {
-        const img = container.querySelector('img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
-      }
-      function sendOrder() {
-        const name = document.getElementById('cust-name').value;
-        const service = document.getElementById('cust-service').value;
-        const msg = `السلام عليكم، أنا ${name}، أحتاج خدمة ${service} لمطبخي.`;
-        window.location.href = `https://wa.me/966560703844?text=${encodeURIComponent(msg)}`;
-      }
-    </script>
   </body>
 </html>

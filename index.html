@@ -11,34 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="assets/index-7b42601c.js"></script>
+    <script defer src="/assets/static-navigation.js"></script>
     <link rel="stylesheet" href="assets/index-f145d107.css">
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      // Clean and direct navigation handling
-      document.addEventListener('click', function(e) {
-        const a = e.target.closest('a');
-        if (a && a.href) {
-          const url = new URL(a.href);
-          if (url.origin === window.location.origin) {
-            // If the path matches our static pages, ensure direct navigation
-            if (url.pathname.includes('interior-paints')) {
-              e.preventDefault();
-              window.location.href = '/interior-paints.html';
-            } else if (url.pathname.includes('kitchen-renovation')) {
-              e.preventDefault();
-              window.location.href = '/kitchen-renovation.html';
-            } else if (url.pathname.includes('exterior-paints')) {
-              e.preventDefault();
-              window.location.href = '/exterior-paints.html';
-            } else if (url.pathname.includes('epoxy')) {
-              e.preventDefault();
-              window.location.href = '/epoxy.html';
-            }
-          }
-        }
-      }, true);
-    </script>
   </body>
 </html>
