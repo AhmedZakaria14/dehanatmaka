@@ -44,6 +44,24 @@ const injectBlogNavigation = () => {
     if (links[0]?.className) blogLink.className = links[0].className;
     nav.appendChild(blogLink);
   });
+
+  document.querySelectorAll("footer ul").forEach((list) => {
+    const links = [...list.querySelectorAll("a[href]")];
+    const hasHomeLink = links.some((link) => new URL(link.href).pathname === "/");
+    const hasBlogLink = links.some(
+      (link) => new URL(link.href).pathname.replace(/\/$/, "") === "/blog",
+    );
+
+    if (!hasHomeLink || hasBlogLink) return;
+
+    const item = document.createElement("li");
+    const blogLink = document.createElement("a");
+    blogLink.href = "/blog";
+    blogLink.textContent = "المدونة";
+    if (links[0]?.className) blogLink.className = links[0].className;
+    item.appendChild(blogLink);
+    list.appendChild(item);
+  });
 };
 
 document.addEventListener("DOMContentLoaded", injectBlogNavigation);

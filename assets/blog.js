@@ -1,4 +1,36 @@
-+(() => {
+(() => {
+  const menuButton = document.querySelector(".menu-toggle");
+  const navigation = document.querySelector(".main-nav");
+
+  if (menuButton && navigation) {
+    const backdrop = document.createElement("div");
+    backdrop.className = "menu-backdrop";
+    backdrop.setAttribute("aria-hidden", "true");
+    document.body.appendChild(backdrop);
+
+    const setMenuState = (open) => {
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.setAttribute("aria-label", open ? "إغلاق القائمة" : "فتح القائمة");
+      navigation.classList.toggle("is-open", open);
+      backdrop.classList.toggle("is-open", open);
+      document.body.classList.toggle("menu-open", open);
+    };
+
+    menuButton.addEventListener("click", () => {
+      setMenuState(menuButton.getAttribute("aria-expanded") !== "true");
+    });
+    backdrop.addEventListener("click", () => setMenuState(false));
+    navigation.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setMenuState(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenuState(false);
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 960) setMenuState(false);
+    });
+  }
+
   const tocLinks = [...document.querySelectorAll(".toc-list a")];
   const headings = tocLinks
     .map((link) => document.querySelector(link.getAttribute("href")))
@@ -27,4 +59,3 @@
     link.setAttribute("rel", [...rel].join(" "));
   });
 })();
-

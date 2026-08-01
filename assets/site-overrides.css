@@ -1,0 +1,20 @@
+/* Shared accessibility fixes for the primary site chrome. */
+a[aria-label="اتصال مباشر"] {
+  background-color: #064fc4 !important;
+  border: 3px solid #fff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .30) !important;
+}
+
+a[aria-label="تواصل عبر واتساب"] {
+  background-color: #08783e !important;
+  border: 3px solid #fff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .30) !important;
+}
+
+@media (max-width: 680px) {
+  a[aria-label="اتصال مباشر"],
+  a[aria-label="تواصل عبر واتساب"] {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
