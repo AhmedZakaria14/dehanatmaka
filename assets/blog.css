@@ -1,3 +1,5 @@
+@import url("/assets/index-f145d107.css");
+
 :root {
   --ink: #10233f;
   --ink-soft: #52647d;
@@ -266,6 +268,8 @@ body.menu-open { overflow: hidden; }
   background: #f7faff;
   border: 1px solid #e1eaf6;
 }
+.article-body ul { list-style: disc; }
+.article-body ol { list-style: decimal; }
 .article-body li { margin: .35rem 0; padding-inline-start: .25rem; }
 .article-body a {
   font-weight: 800;
@@ -468,4 +472,75 @@ body.menu-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
+}
+
+/* Primary site chrome: mirrors the homepage header, drawer and footer. */
+.primary-site-header .container,
+.primary-site-footer .container {
+  width: 100%;
+}
+
+.primary-site-header a,
+.primary-site-footer a,
+.primary-mobile-menu a {
+  text-decoration: none;
+}
+
+.primary-services-menu {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+
+.primary-services:hover .primary-services-menu,
+.primary-services:focus-within .primary-services-menu,
+.primary-services-menu.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.primary-mobile-backdrop {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+
+.primary-mobile-menu {
+  visibility: hidden;
+  transform: translateX(105%);
+  opacity: 0;
+  overflow-y: auto;
+  transition: transform .3s ease, opacity .3s ease, visibility .3s ease;
+}
+
+.primary-mobile-backdrop.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.primary-mobile-menu.is-open {
+  visibility: visible;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+body.primary-menu-open { overflow: hidden; }
+body.primary-menu-open .floating-actions { visibility: hidden; opacity: 0; }
+
+.primary-site-footer .footer-brand-logo {
+  width: auto;
+  height: 40px;
+  max-width: 180px;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .primary-site-footer .footer-brand-logo { margin-inline: 0; }
+}
+
+@media (min-width: 1024px) {
+  .primary-mobile-menu,
+  .primary-mobile-backdrop { display: none !important; }
 }
