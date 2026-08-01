@@ -13,6 +13,7 @@ document.addEventListener(
       "/kitchen-renovation",
       "/exterior-paints",
       "/epoxy",
+      "/blog",
     ]);
 
     const route = url.pathname.replace(/\.html$/, "").replace(/\/$/, "");
@@ -23,3 +24,30 @@ document.addEventListener(
   },
   true,
 );
+
+const injectBlogNavigation = () => {
+  document.querySelectorAll("nav").forEach((nav) => {
+    const links = [...nav.querySelectorAll("a[href]")];
+    const hasSiteLinks = links.some((link) => {
+      const path = new URL(link.href).pathname.replace(/\.html$/, "").replace(/\/$/, "") || "/";
+      return path === "/" || path === "/interior-paints" || path === "/epoxy";
+    });
+    const hasBlogLink = links.some(
+      (link) => new URL(link.href).pathname.replace(/\/$/, "") === "/blog",
+    );
+
+    if (!hasSiteLinks || hasBlogLink) return;
+
+    const blogLink = document.createElement("a");
+    blogLink.href = "/blog";
+    blogLink.textContent = "المدونة";
+    if (links[0]?.className) blogLink.className = links[0].className;
+    nav.appendChild(blogLink);
+  });
+};
+
+document.addEventListener("DOMContentLoaded", injectBlogNavigation);
+new MutationObserver(injectBlogNavigation).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
