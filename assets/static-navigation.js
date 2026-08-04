@@ -4,12 +4,14 @@
   const addBlogLinks = () => {
     let complete = true;
 
-    document.querySelectorAll("header nav, aside nav").forEach((nav) => {
+    document.querySelectorAll("header nav, aside nav, nav.flex.flex-col.gap-2").forEach((nav) => {
       if (blogLinkExists(nav)) return;
       const link = document.createElement("a");
       link.href = "/blog";
       link.textContent = "المدونة";
-      const isMobileNavigation = Boolean(nav.closest("aside"));
+      const isMobileNavigation = Boolean(
+        nav.closest("aside") || nav.matches("nav.flex.flex-col.gap-2"),
+      );
 
       if (isMobileNavigation) {
         link.className = "block text-lg font-semibold text-brand-dark p-4 rounded-lg hover:bg-gray-100";

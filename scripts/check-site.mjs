@@ -69,7 +69,8 @@ assert(!bundle.includes('name:"keywords"'), "bundle: obsolete meta keywords foun
 
 const staticNavigation = read("assets/static-navigation.js");
 assert(staticNavigation.includes('event.target.closest("header button")'), "navigation: mobile menu open is not handled");
-assert(staticNavigation.includes('nav.closest("aside")'), "navigation: mobile menu is not detected");
+assert(staticNavigation.includes("nav.flex.flex-col.gap-2"), "navigation: React mobile menu is not selected");
+assert(staticNavigation.includes('nav.matches("nav.flex.flex-col.gap-2")'), "navigation: React mobile menu is not detected");
 assert(staticNavigation.includes("mobile-blog-link"), "navigation: mobile blog link wrapper is missing");
 
 const kitchen = read("kitchen-renovation.html");
