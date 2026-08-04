@@ -73,6 +73,12 @@ assert(staticNavigation.includes("nav.flex.flex-col.gap-2"), "navigation: React 
 assert(staticNavigation.includes('nav.matches("nav.flex.flex-col.gap-2")'), "navigation: React mobile menu is not detected");
 assert(staticNavigation.includes("mobile-blog-link"), "navigation: mobile blog link wrapper is missing");
 
+const blogStyles = read("assets/blog.css");
+assert(blogStyles.includes(".blog-main > .container { width: 100%; }"), "blog: mobile cards container is not full width");
+assert(blogStyles.includes(".blog-main .blog-card-content"), "blog: responsive mobile card content styles are missing");
+assert(blogStyles.includes("min-height: 44px"), "blog: mobile read-more target is too small");
+assert(blogStyles.includes("@media (max-width: 360px)"), "blog: narrow phone layout is missing");
+
 const kitchen = read("kitchen-renovation.html");
 for (const image of kitchen.matchAll(/<img[^>]+src="https:\/\/res\.cloudinary\.com[^>]+>/g)) {
   assert(/loading="lazy"/.test(image[0]), "kitchen: Cloudinary image is not lazy-loaded");
