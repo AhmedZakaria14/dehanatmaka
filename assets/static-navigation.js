@@ -1,71 +1,38 @@
-document.addEventListener(
-  "click",
-  (event) => {
-    const link = event.target.closest("a");
+(() => {
+  const blogLinkExists = (root) => Boolean(root?.querySelector('a[href="/blog"], a[href="/blog/"]'));
 
-    if (!link?.href) return;
+  const addBlogLinks = () => {
+    let complete = true;
 
-    const url = new URL(link.href);
-    if (url.origin !== window.location.origin) return;
-
-    const staticRoutes = new Set([
-      "/interior-paints",
-      "/kitchen-renovation",
-      "/exterior-paints",
-      "/epoxy",
-      "/blog",
-    ]);
-
-    const route = url.pathname.replace(/\.html$/, "").replace(/\/$/, "");
-    if (!staticRoutes.has(route)) return;
-
-    event.preventDefault();
-    window.location.assign(route);
-  },
-  true,
-);
-
-const injectBlogNavigation = () => {
-  document.querySelectorAll("nav").forEach((nav) => {
-    const links = [...nav.querySelectorAll("a[href]")];
-    const hasSiteLinks = links.some((link) => {
-      const path = new URL(link.href).pathname.replace(/\.html$/, "").replace(/\/$/, "") || "/";
-      return path === "/" || path === "/interior-paints" || path === "/epoxy";
+    document.querySelectorAll("header nav, aside nav").forEach((nav) => {
+      if (blogLinkExists(nav)) return;
+      const link = document.createElement("a");
+      link.href = "/blog";
+      link.textContent = "المدونة";
+      link.className = "font-bold text-brand-dark transition-colors hover:text-brand-blue";
+      nav.append(link);
     });
-    const hasBlogLink = links.some(
-      (link) => new URL(link.href).pathname.replace(/\/$/, "") === "/blog",
-    );
 
-    if (!hasSiteLinks || hasBlogLink) return;
+    document.querySelectorAll("footer nav ul").forEach((list) => {
+      if (blogLinkExists(list)) return;
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = "/blog";
+      link.textContent = "المدونة";
+      link.className = "hover:text-brand-blue transition-colors";
+      item.append(link);
+      list.append(item);
+    });
 
-    const blogLink = document.createElement("a");
-    blogLink.href = "/blog";
-    blogLink.textContent = "المدونة";
-    if (links[0]?.className) blogLink.className = links[0].className;
-    nav.appendChild(blogLink);
+    if (!document.querySelector("header nav") || !document.querySelector("footer")) complete = false;
+    return complete;
+  };
+
+  if (addBlogLinks()) return;
+
+  const observer = new MutationObserver(() => {
+    if (addBlogLinks()) observer.disconnect();
   });
-
-  document.querySelectorAll("footer ul").forEach((list) => {
-    const links = [...list.querySelectorAll("a[href]")];
-    const hasHomeLink = links.some((link) => new URL(link.href).pathname === "/");
-    const hasBlogLink = links.some(
-      (link) => new URL(link.href).pathname.replace(/\/$/, "") === "/blog",
-    );
-
-    if (!hasHomeLink || hasBlogLink) return;
-
-    const item = document.createElement("li");
-    const blogLink = document.createElement("a");
-    blogLink.href = "/blog";
-    blogLink.textContent = "المدونة";
-    if (links[0]?.className) blogLink.className = links[0].className;
-    item.appendChild(blogLink);
-    list.appendChild(item);
-  });
-};
-
-document.addEventListener("DOMContentLoaded", injectBlogNavigation);
-new MutationObserver(injectBlogNavigation).observe(document.documentElement, {
-  childList: true,
-  subtree: true,
-});
+  observer.observe(document.body, { childList: true, subtree: true });
+  window.setTimeout(() => observer.disconnect(), 5000);
+})();

@@ -1,0 +1,10 @@
+{
+  "name": "dehanatmaka",
+  "private": true,
+  "scripts": {
+    "test": "node scripts/check-site.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
