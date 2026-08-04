@@ -20,6 +20,12 @@ const pages = [
   ["blog/moalem-dahanat-decor-makkah.html", "https://www.dehanatmaka.com/blog/moalem-dahanat-decor-makkah"],
   ["blog/dahn-abwab-khashab-makkah.html", "https://www.dehanatmaka.com/blog/dahn-abwab-khashab-makkah"],
   ["blog/dahn-abwab-hadid-makkah.html", "https://www.dehanatmaka.com/blog/dahn-abwab-hadid-makkah"],
+  ["blog/moalem-boya-al-sharaie-makkah.html", "https://www.dehanatmaka.com/blog/moalem-boya-al-sharaie-makkah"],
+  ["blog/moalem-boya-haraj-makkah.html", "https://www.dehanatmaka.com/blog/moalem-boya-haraj-makkah"],
+  ["blog/tajdid-matabikh-qadima-errors.html", "https://www.dehanatmaka.com/blog/tajdid-matabikh-qadima-errors"],
+  ["blog/tajdid-matabikh-khashab.html", "https://www.dehanatmaka.com/blog/tajdid-matabikh-khashab"],
+  ["blog/tajdid-matabikh-aluminium.html", "https://www.dehanatmaka.com/blog/tajdid-matabikh-aluminium"],
+  ["blog/taghyir-lawn-matbakh-alumetal.html", "https://www.dehanatmaka.com/blog/taghyir-lawn-matbakh-alumetal"],
 ];
 
 const titles = new Map();
@@ -32,6 +38,11 @@ for (const [path, canonical] of pages) {
   assert(/<h1(?:\s[^>]*)?>[^<]+<\/h1>/.test(html), `${path}: missing static H1`);
   assert(!html.includes("yourdomain.com"), `${path}: placeholder domain found`);
   assert(!/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/.test(html), `${path}: zoom is disabled`);
+  if (path.startsWith("blog/") && path !== "blog/index.html") {
+    assert(html.includes("\"@type\":\"BlogPosting\""), `${path}: missing BlogPosting schema`);
+    assert(/<meta property="og:image" content="https:\/\/www\.dehanatmaka\.com\/images\/blog\/[^"]+\.webp"/.test(html), `${path}: missing local OG image`);
+    assert(/<img class="article-cover"[^>]+width="1600" height="900"[^>]+fetchpriority="high"/.test(html), `${path}: incomplete article cover attributes`);
+  }
 
   if (title) {
     assert(!titles.has(title), `${path}: duplicate title also used by ${titles.get(title)}`);
