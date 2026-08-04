@@ -1,4 +1,22 @@
 /* Shared accessibility fixes for the primary site chrome. */
+.seo-fallback {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Cairo", system-ui, sans-serif;
+  color: white;
+  background: linear-gradient(135deg, #0f172a, #111827 55%, #0052d4);
+}
+
+.seo-fallback section { max-width: 56rem; }
+.seo-fallback h1 { margin: 0 0 1.25rem; font-size: clamp(2.5rem, 8vw, 4.5rem); }
+.seo-fallback p { margin: 0; color: #d1d5db; font-size: clamp(1.1rem, 3vw, 1.5rem); line-height: 1.9; }
+
+/* Gold controls need dark text to meet WCAG contrast requirements. */
+.bg-brand-gold.text-white { color: #172238 !important; }
+
 a[aria-label="اتصال مباشر"] {
   background-color: #064fc4 !important;
   border: 3px solid #fff;
