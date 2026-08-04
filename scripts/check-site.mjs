@@ -67,6 +67,11 @@ assert(!bundle.includes("yourdomain.com"), "bundle: placeholder canonical found"
 assert(bundle.includes('path:"/interior-paints"'), "bundle: interior route is not registered");
 assert(!bundle.includes('name:"keywords"'), "bundle: obsolete meta keywords found");
 
+const staticNavigation = read("assets/static-navigation.js");
+assert(staticNavigation.includes('event.target.closest("header button")'), "navigation: mobile menu open is not handled");
+assert(staticNavigation.includes('nav.closest("aside")'), "navigation: mobile menu is not detected");
+assert(staticNavigation.includes("mobile-blog-link"), "navigation: mobile blog link wrapper is missing");
+
 const kitchen = read("kitchen-renovation.html");
 for (const image of kitchen.matchAll(/<img[^>]+src="https:\/\/res\.cloudinary\.com[^>]+>/g)) {
   assert(/loading="lazy"/.test(image[0]), "kitchen: Cloudinary image is not lazy-loaded");
