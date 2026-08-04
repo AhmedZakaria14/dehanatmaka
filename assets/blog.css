@@ -460,14 +460,63 @@ body.menu-open { overflow: hidden; }
   .blog-grid,
   .footer-grid { grid-template-columns: 1fr; }
   .blog-intro { align-items: flex-start; flex-direction: column; }
-  .blog-card img { aspect-ratio: 16 / 9; object-position: center; }
-  .blog-card-content { padding: 20px 18px; }
+  .blog-main { padding: 34px 0 58px; }
+  .blog-main > .container { width: 100%; }
+  .blog-main .blog-grid { width: 100%; gap: 20px; }
+  .blog-main .blog-card {
+    width: 100%;
+    border-inline: 0;
+    border-radius: 0;
+    box-shadow: 0 10px 30px rgba(15, 35, 63, .10);
+  }
+  .blog-main .blog-card:hover { transform: none; }
+  .blog-main .blog-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-position: center;
+  }
+  .blog-main .blog-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(18px, 5vw, 26px);
+  }
+  .blog-main .blog-card .tag {
+    padding: .3rem .7rem;
+    border-radius: 999px;
+    background: #eaf2ff;
+  }
+  .blog-main .blog-card h2 {
+    margin: .7rem 0 .65rem;
+    font-size: clamp(1.15rem, 5.2vw, 1.45rem);
+    line-height: 1.55;
+  }
+  .blog-main .blog-card p {
+    margin-bottom: 1.15rem;
+    font-size: clamp(.94rem, 4vw, 1.02rem);
+    line-height: 1.85;
+  }
+  .blog-main .read-more {
+    min-height: 44px;
+    padding: .6rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: #eaf2ff;
+    color: var(--brand-dark);
+  }
   .service-cta .cta-actions { flex-direction: column; }
   .service-cta .cta-actions a { width: 100%; }
   .floating-actions { inset-inline-end: 12px; bottom: max(12px, env(safe-area-inset-bottom)); gap: 8px; }
   .floating-actions a { width: 56px; height: 56px; }
   .site-footer { text-align: center; }
   .footer-brand { justify-content: center; }
+}
+@media (max-width: 360px) {
+  .blog-main { padding-top: 28px; }
+  .blog-main .blog-grid { gap: 16px; }
+  .blog-main .blog-card-content { padding: 17px 16px 19px; }
+  .blog-main .blog-card h2 { font-size: 1.12rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
