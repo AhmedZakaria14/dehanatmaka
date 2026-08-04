@@ -29,6 +29,19 @@ const pages = [
 ];
 
 const titles = new Map();
+const articleKeywords = new Map([
+  ["blog/moalem-dahanat-makkah.html", ["معلم دهانات مكة", "معلم دهانات مكه", "معلم دهانات بمكه", "معلم دهانات بمكة", "معلم دهانات مكه المكرمه", "معلم دهانات بمكه المكرمه", "معلم دهانات مكة المكرمة", "أفضل معلم دهانات"]],
+  ["blog/moalem-boya-makkah.html", ["معلم بويه مكه", "معلم بوية", "معلم بويه في مكه", "معلم بويات مكه", "معلم بويات", "معلم بوية في مكة", "معلم بويات مكة"]],
+  ["blog/moalem-dahanat-decor-makkah.html", ["معلم دهانات وديكورات مكة", "معلم دهانات وديكورات مكه", "دهانات وديكورات مكه", "معلم بويات وديكورات مكه"]],
+  ["blog/dahn-abwab-khashab-makkah.html", ["معلم دهان ابواب خشب", "معلم بويه ابواب خشب", "معلم دهان ابواب خشب مكة"]],
+  ["blog/dahn-abwab-hadid-makkah.html", ["معلم دهان ابواب حديد"]],
+  ["blog/moalem-boya-al-sharaie-makkah.html", ["معلم بويه مكه الشرايع", "معلم بويه في الشرائع", "معلم دهانات بمكه الشرايع"]],
+  ["blog/moalem-boya-haraj-makkah.html", ["معلم بويه حراج"]],
+  ["blog/tajdid-matabikh-qadima-errors.html", ["تجديد مطابخ", "تجديد المطابخ", "تجديد المطابخ القديمه", "تجديد مطابخ قديمه", "مطابخ قبل وبعد التجديد"]],
+  ["blog/tajdid-matabikh-khashab.html", ["تجديد مطابخ خشب", "تجديد المطبخ الخشب", "كيفية تجديد المطبخ الخشب"]],
+  ["blog/tajdid-matabikh-aluminium.html", ["تجديد مطابخ الالمنيوم", "تجديد المطبخ الالوميتال", "تجديد مطبخ الوميتال"]],
+  ["blog/taghyir-lawn-matbakh-alumetal.html", ["تغيير لون مطبخ الوميتال", "تغير لون المطبخ الالوميتال", "تغير لون مطبخ الوميتال", "تغيير لون الوميتال المطبخ", "تغيير لون دواليب المطبخ الالمنيوم"]],
+]);
 for (const [path, canonical] of pages) {
   const html = read(path);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
@@ -42,6 +55,21 @@ for (const [path, canonical] of pages) {
     assert(html.includes("\"@type\":\"BlogPosting\""), `${path}: missing BlogPosting schema`);
     assert(/<meta property="og:image" content="https:\/\/www\.dehanatmaka\.com\/images\/blog\/[^"]+\.webp"/.test(html), `${path}: missing local OG image`);
     assert(/<img class="article-cover"[^>]+width="1600" height="900"[^>]+fetchpriority="high"/.test(html), `${path}: incomplete article cover attributes`);
+
+    const expectedKeywords = articleKeywords.get(path) ?? [];
+    const metaKeywords = html.match(/<meta name="keywords" content="([^"]+)"/)?.[1].split(", ") ?? [];
+    const articleSchema = [...html.matchAll(/<script type="application\/ld\+json">([^<]+)<\/script>/g)]
+      .flatMap((match) => JSON.parse(match[1])["@graph"] ?? [])
+      .find((entry) => entry["@type"] === "BlogPosting");
+    assert(expectedKeywords.length > 0, `${path}: no target keyword mapping`);
+    assert(expectedKeywords.every((keyword) => metaKeywords.includes(keyword)), `${path}: sheet keywords are missing from metadata`);
+    assert(expectedKeywords.every((keyword) => articleSchema?.keywords?.includes(keyword)), `${path}: sheet keywords are missing from BlogPosting schema`);
+
+    const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
+    assert(description === html.match(/<meta property="og:description" content="([^"]+)"/)?.[1], `${path}: Open Graph description differs`);
+    assert(description === html.match(/<meta name="twitter:description" content="([^"]+)"/)?.[1], `${path}: Twitter description differs`);
+    assert(title === html.match(/<meta property="og:title" content="([^"]+)"/)?.[1], `${path}: Open Graph title differs`);
+    assert(title === html.match(/<meta name="twitter:title" content="([^"]+)"/)?.[1], `${path}: Twitter title differs`);
   }
 
   if (title) {
