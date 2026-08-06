@@ -1,0 +1,42 @@
+name: Apply four article package
+
+on:
+  push:
+    branches:
+      - content/publish-four-articles-20260806
+    paths:
+      - .publish-payload/READY
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: content/publish-four-articles-20260806
+          fetch-depth: 0
+      - name: Restore article files
+        shell: bash
+        run: |
+          if [ ! -f .publish-payload/READY ]; then
+            exit 0
+          fi
+          cat .publish-payload/part-* | base64 --decode > /tmp/four-articles.tar.xz
+          tar -xJf /tmp/four-articles.tar.xz -C .
+          rm -rf .publish-payload .article-payload
+      - name: Validate site
+        run: npm test
+      - name: Commit published articles
+        shell: bash
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish four SEO blog articles"
+          git push origin HEAD:content/publish-four-articles-20260806
