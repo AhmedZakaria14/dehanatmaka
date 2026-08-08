@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="دهان جدران مطبخ بلون مقاوم للرطوبة والتنظيف">
+  <defs>
+    <linearGradient id="room" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f8faf7"/><stop offset="1" stop-color="#e1e8dc"/></linearGradient>
+    <linearGradient id="wallpaint" x1="0" x2="1"><stop offset="0" stop-color="#cfdccc"/><stop offset="1" stop-color="#9fb49d"/></linearGradient>
+    <linearGradient id="tile" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9e7df"/></linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#room)"/>
+  <rect x="615" y="90" width="850" height="615" rx="10" fill="#eef3ea"/>
+  <path d="M620 108h690v490c-155-8-322 0-505 18-72 7-132 17-185 28z" fill="url(#wallpaint)" opacity=".95"/>
+  <path d="M1260 145c65 3 135 17 202 50v415c-66-28-132-39-202-43z" fill="#c7d7c2" opacity=".74"/>
+  <g opacity=".32" stroke="#ffffff" stroke-width="4"><path d="M650 165h560"/><path d="M650 238h670"/><path d="M650 312h650"/><path d="M650 386h680"/><path d="M650 462h610"/><path d="M650 535h670"/></g>
+  <rect x="100" y="440" width="515" height="220" fill="url(#tile)"/>
+  <g stroke="#d9d7cf" stroke-width="4"><path d="M100 500h515M100 560h515M100 620h515"/><path d="M160 440v220M285 440v220M410 440v220M535 440v220"/></g>
+  <rect x="120" y="318" width="390" height="70" rx="8" fill="#b68f5f"/>
+  <rect x="110" y="382" width="535" height="38" fill="#ece8df"/>
+  <path d="M90 660h1380v170H90z" fill="#eeeae2"/>
+  <path d="M130 650h1320v34H130z" fill="#d4c7b8"/>
+  <g transform="translate(1035 210)">
+    <circle cx="115" cy="70" r="34" fill="#c79260"/>
+    <path d="M75 126c42-25 92-25 134 0l30 310H45z" fill="#fafafa"/>
+    <path d="M202 152c66-35 109-85 156-148" stroke="#fafafa" stroke-width="34" stroke-linecap="round" fill="none"/>
+    <path d="M340 12l72-55" stroke="#5d6759" stroke-width="9" stroke-linecap="round"/>
+    <rect x="396" y="-70" width="120" height="34" rx="17" fill="#91a787" transform="rotate(-20 456 -53)"/>
+    <path d="M400 -53h110" stroke="#71876d" stroke-width="5" opacity=".45"/>
+  </g>
+  <rect x="1165" y="664" width="115" height="95" rx="12" fill="#f7f7f5" stroke="#d2d2cf" stroke-width="5"/>
+  <rect x="685" y="700" width="190" height="60" rx="12" fill="#8a9e83" opacity=".85"/>
+  <circle cx="360" cy="312" r="32" fill="#d7e5d0"/><circle cx="265" cy="310" r="30" fill="#c7d8bf"/><path d="M250 315c25-62 95-61 120 0" stroke="#6d7b5b" stroke-width="10" fill="none"/>
+</svg>
