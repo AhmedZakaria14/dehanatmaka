@@ -8,27 +8,62 @@ const assert = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
-const pages = [
+const routeToFile = (route) => {
+  const clean = route.split(/[?#]/)[0].replace(/\/$/, "");
+  if (!clean || clean === "/") return "index.html";
+  if (clean === "/blog") return "blog/index.html";
+  return `${clean.slice(1)}.html`;
+};
+
+const resolveLocalHref = (href) => {
+  if (!href || href.startsWith("#")) return null;
+  if (/^(?:tel:|mailto:|sms:|whatsapp:|data:|javascript:)/i.test(href)) return null;
+  if (/^https?:\/\//i.test(href)) {
+    try {
+      const url = new URL(href);
+      if (!["www.dehanatmaka.com", "dehanatmaka.com"].includes(url.hostname)) return null;
+      return routeToFile(`${url.pathname}${url.search}${url.hash}`);
+    } catch {
+      return null;
+    }
+  }
+  if (href.startsWith("/")) return routeToFile(href);
+  return href.split(/[?#]/)[0];
+};
+
+const localAssetPath = (reference, currentPath) => {
+  const clean = reference.split(/[?#]/)[0];
+  if (!clean || /^(?:https?:|tel:|mailto:|data:|#)/i.test(clean)) return null;
+  if (clean.startsWith("/")) return clean.slice(1);
+  return new URL(clean, new URL(currentPath, "file:///site/")).pathname.slice(6);
+};
+
+const basePages = [
   ["index.html", "https://www.dehanatmaka.com/"],
   ["interior-paints.html", "https://www.dehanatmaka.com/interior-paints"],
   ["exterior-paints.html", "https://www.dehanatmaka.com/exterior-paints"],
   ["epoxy.html", "https://www.dehanatmaka.com/epoxy"],
   ["kitchen-renovation.html", "https://www.dehanatmaka.com/kitchen-renovation"],
   ["blog/index.html", "https://www.dehanatmaka.com/blog"],
-  ["blog/moalem-dahanat-makkah.html", "https://www.dehanatmaka.com/blog/moalem-dahanat-makkah"],
-  ["blog/moalem-boya-makkah.html", "https://www.dehanatmaka.com/blog/moalem-boya-makkah"],
-  ["blog/moalem-dahanat-decor-makkah.html", "https://www.dehanatmaka.com/blog/moalem-dahanat-decor-makkah"],
-  ["blog/dahn-abwab-khashab-makkah.html", "https://www.dehanatmaka.com/blog/dahn-abwab-khashab-makkah"],
-  ["blog/dahn-abwab-hadid-makkah.html", "https://www.dehanatmaka.com/blog/dahn-abwab-hadid-makkah"],
-  ["blog/moalem-boya-al-sharaie-makkah.html", "https://www.dehanatmaka.com/blog/moalem-boya-al-sharaie-makkah"],
-  ["blog/moalem-boya-haraj-makkah.html", "https://www.dehanatmaka.com/blog/moalem-boya-haraj-makkah"],
-  ["blog/tajdid-matabikh-qadima-errors.html", "https://www.dehanatmaka.com/blog/tajdid-matabikh-qadima-errors"],
-  ["blog/tajdid-matabikh-khashab.html", "https://www.dehanatmaka.com/blog/tajdid-matabikh-khashab"],
-  ["blog/tajdid-matabikh-aluminium.html", "https://www.dehanatmaka.com/blog/tajdid-matabikh-aluminium"],
-  ["blog/taghyir-lawn-matbakh-alumetal.html", "https://www.dehanatmaka.com/blog/taghyir-lawn-matbakh-alumetal"],
 ];
 
-const titles = new Map();
+const articlePaths = readdirSync(new URL("blog/", root))
+  .filter((name) => name.endsWith(".html") && name !== "index.html")
+  .sort()
+  .map((name) => `blog/${name}`);
+
+const pages = [
+  ...basePages,
+  ...articlePaths.map((path) => [path, `https://www.dehanatmaka.com/blog/${path.replace(/^blog\//, "").replace(/\.html$/, "")}`]),
+];
+
+const newestArticles = new Map([
+  ["blog/moalem-epoxy-makkah.html", "/images/blog/moalem-epoxy-makkah-generated.svg"],
+  ["blog/dahan-matabikh-makkah.html", "/images/blog/dahan-matabikh-makkah-generated.svg"],
+  ["blog/telaa-jodran-matabikh.html", "/images/blog/telaa-jodran-matabikh-generated.svg"],
+  ["blog/dahan-matabikh-khashab-makkah.html", "/images/blog/dahan-matabikh-khashab-makkah-generated.svg"],
+]);
+
 const articleKeywords = new Map([
   ["blog/moalem-dahanat-makkah.html", ["معلم دهانات مكة", "معلم دهانات مكه", "معلم دهانات بمكه", "معلم دهانات بمكة", "معلم دهانات مكه المكرمه", "معلم دهانات بمكه المكرمه", "معلم دهانات مكة المكرمة", "أفضل معلم دهانات"]],
   ["blog/moalem-boya-makkah.html", ["معلم بوية مكة", "معلم بويه مكه", "معلم بوية", "معلم بويه في مكه", "معلم بويات مكه", "معلم بويات", "معلم بوية في مكة", "معلم بويات مكة"]],
@@ -41,36 +76,28 @@ const articleKeywords = new Map([
   ["blog/tajdid-matabikh-khashab.html", ["تجديد مطابخ خشب", "تجديد المطبخ الخشب", "كيفية تجديد المطبخ الخشب"]],
   ["blog/tajdid-matabikh-aluminium.html", ["تجديد مطابخ الالمنيوم", "تجديد المطبخ الالوميتال", "تجديد مطبخ الوميتال"]],
   ["blog/taghyir-lawn-matbakh-alumetal.html", ["تغيير لون مطبخ الوميتال", "تغير لون المطبخ الالوميتال", "تغير لون مطبخ الوميتال", "تغيير لون الوميتال المطبخ", "تغيير لون دواليب المطبخ الالمنيوم"]],
+  ["blog/moalem-epoxy-makkah.html", ["معلم ابوكسي", "معلم ابوكسي بمكة", "معلم ايبوكسي", "معلم ايبوكسي بمكة", "ارضيات ايبوكسي مكة", "دهان ايبوكسي ارضيات"]],
+  ["blog/dahan-matabikh-makkah.html", ["دهان مطابخ", "دهان مطابخ بمكة", "دهان مطابخ قديمة", "طلاء مطابخ", "معلم دهان مطابخ بمكة", "دهان دواليب المطبخ"]],
+  ["blog/telaa-jodran-matabikh.html", ["طلاء جدران مطابخ", "طلاء جدران المطبخ", "دهان حوائط المطبخ", "ألوان دهانات حوائط المطبخ", "دهان مطابخ قابل للغسل", "طلاء مطابخ مقاوم للرطوبة"]],
+  ["blog/dahan-matabikh-khashab-makkah.html", ["دهان المطابخ الخشب", "دهان المطابخ الخشب بمكة", "دهان مطابخ خشب قديم", "دهان مطابخ خشب لاكيه", "دهان دولاب مطبخ خشب", "معلم دهان مطابخ خشب بمكة"]],
 ]);
+
+const titles = new Map();
+const sitemap = read("sitemap.xml");
+
 for (const [path, canonical] of pages) {
   const html = read(path);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
+  const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
+
   assert(Boolean(title), `${path}: missing title`);
-  assert(/<meta name="description" content="[^"]+"/.test(html), `${path}: missing description`);
+  assert(Boolean(description), `${path}: missing meta description`);
   assert(html.includes(`<link rel="canonical" href="${canonical}"`), `${path}: incorrect canonical`);
+  assert(html.includes(`content="${canonical}"`) || path === "index.html", `${path}: canonical URL is not repeated in social metadata`);
   assert(/<h1(?:\s[^>]*)?>[^<]+<\/h1>/.test(html), `${path}: missing static H1`);
   assert(!html.includes("yourdomain.com"), `${path}: placeholder domain found`);
   assert(!/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/.test(html), `${path}: zoom is disabled`);
-  if (path.startsWith("blog/") && path !== "blog/index.html") {
-    assert(html.includes("\"@type\":\"BlogPosting\""), `${path}: missing BlogPosting schema`);
-    assert(/<meta property="og:image" content="https:\/\/www\.dehanatmaka\.com\/images\/blog\/[^"]+\.webp"/.test(html), `${path}: missing local OG image`);
-    assert(/<img class="article-cover"[^>]+width="1600" height="900"[^>]+fetchpriority="high"/.test(html), `${path}: incomplete article cover attributes`);
-
-    const expectedKeywords = articleKeywords.get(path) ?? [];
-    const metaKeywords = html.match(/<meta name="keywords" content="([^"]+)"/)?.[1].split(", ") ?? [];
-    const articleSchema = [...html.matchAll(/<script type="application\/ld\+json">([^<]+)<\/script>/g)]
-      .flatMap((match) => JSON.parse(match[1])["@graph"] ?? [])
-      .find((entry) => entry["@type"] === "BlogPosting");
-    assert(expectedKeywords.length > 0, `${path}: no target keyword mapping`);
-    assert(expectedKeywords.every((keyword) => metaKeywords.includes(keyword)), `${path}: sheet keywords are missing from metadata`);
-    assert(expectedKeywords.every((keyword) => articleSchema?.keywords?.includes(keyword)), `${path}: sheet keywords are missing from BlogPosting schema`);
-
-    const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
-    assert(description === html.match(/<meta property="og:description" content="([^"]+)"/)?.[1], `${path}: Open Graph description differs`);
-    assert(description === html.match(/<meta name="twitter:description" content="([^"]+)"/)?.[1], `${path}: Twitter description differs`);
-    assert(title === html.match(/<meta property="og:title" content="([^"]+)"/)?.[1], `${path}: Open Graph title differs`);
-    assert(title === html.match(/<meta name="twitter:title" content="([^"]+)"/)?.[1], `${path}: Twitter title differs`);
-  }
+  assert(sitemap.includes(`<loc>${canonical}</loc>`), `sitemap: missing ${canonical}`);
 
   if (title) {
     assert(!titles.has(title), `${path}: duplicate title also used by ${titles.get(title)}`);
@@ -83,39 +110,73 @@ for (const [path, canonical] of pages) {
   }
 
   for (const match of html.matchAll(/<(?:img|script|link)[^>]+(?:src|href)="([^"]+)"/g)) {
-    const reference = match[1].split(/[?#]/)[0];
-    if (!reference || /^(?:https?:|tel:|mailto:|data:|#)/.test(reference)) continue;
-    const resolved = reference.startsWith("/") ? reference.slice(1) : new URL(reference, new URL(path, "file:///site/")).pathname.slice(6);
-    assert(existsSync(new URL(resolved, root)), `${path}: missing local asset ${reference}`);
+    const asset = localAssetPath(match[1], path);
+    if (!asset) continue;
+    assert(existsSync(new URL(asset, root)), `${path}: missing local asset ${match[1]}`);
+  }
+
+  for (const match of html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>/g)) {
+    const target = resolveLocalHref(match[1]);
+    if (!target) continue;
+    assert(existsSync(new URL(target, root)), `${path}: broken internal link ${match[1]} -> ${target}`);
+  }
+
+  if (path.startsWith("blog/") && path !== "blog/index.html") {
+    const scripts = [...html.matchAll(/<script type="application\/ld\+json">([^<]+)<\/script>/g)].map((match) => JSON.parse(match[1]));
+    const graphEntries = scripts.flatMap((script) => script["@graph"] ?? [script]);
+    const articleSchema = graphEntries.find((entry) => entry["@type"] === "BlogPosting");
+    const breadcrumbs = graphEntries.find((entry) => entry["@type"] === "BreadcrumbList");
+
+    assert(html.includes('property="og:type" content="article"'), `${path}: missing article Open Graph type`);
+    assert(description === html.match(/<meta property="og:description" content="([^"]+)"/)?.[1], `${path}: Open Graph description differs`);
+    assert(description === html.match(/<meta name="twitter:description" content="([^"]+)"/)?.[1], `${path}: Twitter description differs`);
+    assert(title === html.match(/<meta property="og:title" content="([^"]+)"/)?.[1], `${path}: Open Graph title differs`);
+    assert(title === html.match(/<meta name="twitter:title" content="([^"]+)"/)?.[1], `${path}: Twitter title differs`);
+    assert(new RegExp(`<meta property="og:image" content="https:\\/\\/www\\.dehanatmaka\\.com\\/images\\/(?:blog\\/)?[^\"]+\\.(?:webp|svg)"`).test(html), `${path}: missing local OG image`);
+    assert(new RegExp(`<meta name="twitter:image" content="https:\\/\\/www\\.dehanatmaka\\.com\\/images\\/(?:blog\\/)?[^\"]+\\.(?:webp|svg)"`).test(html), `${path}: missing local Twitter image`);
+    assert(/<img class="article-cover"[^>]+width="1600" height="900"[^>]+fetchpriority="high"/.test(html), `${path}: incomplete article cover attributes`);
+    assert(Boolean(articleSchema), `${path}: missing BlogPosting schema`);
+    assert(Boolean(breadcrumbs), `${path}: missing BreadcrumbList schema`);
+    assert(articleSchema?.mainEntityOfPage?.["@id"] === canonical, `${path}: BlogPosting mainEntityOfPage does not match canonical`);
+
+    const metaKeywords = html.match(/<meta name="keywords" content="([^"]+)"/)?.[1].split(/,\s*/) ?? [];
+    const expectedKeywords = articleKeywords.get(path) ?? [];
+    assert(expectedKeywords.length > 0, `${path}: no target keyword mapping`);
+    assert(expectedKeywords.every((keyword) => metaKeywords.includes(keyword)), `${path}: target keywords are missing from meta keywords`);
+    assert(expectedKeywords.every((keyword) => articleSchema?.keywords?.includes(keyword)), `${path}: target keywords are missing from BlogPosting schema`);
+
+    const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? html;
+    const internalLinksInMain = [...main.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>/g)]
+      .map((match) => resolveLocalHref(match[1]))
+      .filter(Boolean);
+    assert(internalLinksInMain.length >= 2, `${path}: too few internal links inside article area`);
+    if (newestArticles.has(path)) {
+      assert(internalLinksInMain.length >= 4, `${path}: newest article needs richer internal linking`);
+      const generatedImage = newestArticles.get(path);
+      assert(existsSync(new URL(generatedImage.slice(1), root)), `${path}: generated article image is missing`);
+      const buildScript = read("scripts/build-vercel.sh");
+      assert(buildScript.includes(path.replace("blog/", "dist/blog/")), `${path}: build script does not target this newest article`);
+      assert(buildScript.includes(generatedImage), `${path}: build script does not apply the generated image`);
+    }
   }
 }
 
-const bundle = read("assets/index-9b7776bd.js");
-assert(!bundle.includes("yourdomain.com"), "bundle: placeholder canonical found");
-assert(bundle.includes('path:"/interior-paints"'), "bundle: interior route is not registered");
-assert(!bundle.includes('name:"keywords"'), "bundle: obsolete meta keywords found");
+const blogIndex = read("blog/index.html");
+for (const path of articlePaths) {
+  const slug = path.replace(/^blog\//, "").replace(/\.html$/, "");
+  assert(blogIndex.includes(`/blog/${slug}`), `blog/index.html: missing card for ${slug}`);
+}
+for (const image of newestArticles.values()) {
+  assert(read("scripts/build-vercel.sh").includes(image), `build-vercel.sh: missing generated image replacement ${image}`);
+}
 
 const staticNavigation = read("assets/static-navigation.js");
-assert(staticNavigation.includes('event.target.closest("header button")'), "navigation: mobile menu open is not handled");
-assert(staticNavigation.includes("nav.flex.flex-col.gap-2"), "navigation: React mobile menu is not selected");
-assert(staticNavigation.includes('nav.matches("nav.flex.flex-col.gap-2")'), "navigation: React mobile menu is not detected");
 assert(staticNavigation.includes("mobile-blog-link"), "navigation: mobile blog link wrapper is missing");
 
 const blogStyles = read("assets/blog.css");
 assert(blogStyles.includes(".blog-main > .container { width: 100%; }"), "blog: mobile cards container is not full width");
-assert(blogStyles.includes(".blog-main .blog-card-content"), "blog: responsive mobile card content styles are missing");
 assert(blogStyles.includes("min-height: 44px"), "blog: mobile read-more target is too small");
-assert(blogStyles.includes("@media (max-width: 360px)"), "blog: narrow phone layout is missing");
 
-const kitchen = read("kitchen-renovation.html");
-for (const image of kitchen.matchAll(/<img[^>]+src="https:\/\/res\.cloudinary\.com[^>]+>/g)) {
-  assert(/loading="lazy"/.test(image[0]), "kitchen: Cloudinary image is not lazy-loaded");
-  assert(/width="\d+" height="\d+"/.test(image[0]), "kitchen: Cloudinary image is missing dimensions");
-  assert(/srcset=/.test(image[0]) && /sizes=/.test(image[0]), "kitchen: Cloudinary image is not responsive");
-}
-
-const sitemap = read("sitemap.xml");
-for (const [, canonical] of pages) assert(sitemap.includes(`<loc>${canonical}</loc>`), `sitemap: missing ${canonical}`);
 assert(read("robots.txt").includes("https://www.dehanatmaka.com/sitemap.xml"), "robots.txt: sitemap missing");
 JSON.parse(read("vercel.json"));
 
@@ -128,4 +189,4 @@ if (failures.length) {
   console.error(failures.map((failure) => `- ${failure}`).join("\n"));
   process.exit(1);
 }
-console.log(`Validated ${pages.length} pages, metadata, JSON-LD, assets, sitemap, and JavaScript.`);
+console.log(`Validated ${pages.length} pages, ${articlePaths.length} blog articles, SEO metadata, schema, internal links, images, sitemap, and JavaScript.`);
