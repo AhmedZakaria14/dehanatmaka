@@ -18,10 +18,29 @@ if [ -f .publish-payload/READY ]; then
   tar -xJf /tmp/four-articles.tar.xz -C dist
 fi
 
-# Use the dedicated epoxy service image for the epoxy article and its blog card.
-if [ -f dist/blog/moalem-epoxy-makkah.html ] && [ -f dist/blog/index.html ]; then
-  sed -i 's#/images/blog/moalem-dahanat-decor-makkah.webp#/images/bb51daf26825637272ae1835791a1cc9.webp#g' \
-    dist/blog/moalem-epoxy-makkah.html dist/blog/index.html
+# Use the generated article images for the four newest blog posts while preserving the article template.
+if [ -d dist/blog ]; then
+  if [ -f dist/blog/moalem-epoxy-makkah.html ]; then
+    sed -i \
+      -e 's#/images/blog/moalem-dahanat-decor-makkah.webp#/images/blog/moalem-epoxy-makkah-generated.svg#g' \
+      -e 's#/images/bb51daf26825637272ae1835791a1cc9.webp#/images/blog/moalem-epoxy-makkah-generated.svg#g' \
+      dist/blog/moalem-epoxy-makkah.html
+  fi
+  if [ -f dist/blog/dahan-matabikh-makkah.html ]; then
+    sed -i 's#/images/blog/taghyir-lawn-matbakh-alumetal.webp#/images/blog/dahan-matabikh-makkah-generated.svg#g' dist/blog/dahan-matabikh-makkah.html
+  fi
+  if [ -f dist/blog/telaa-jodran-matabikh.html ]; then
+    sed -i 's#/images/blog/tajdid-matabikh-qadima-errors.webp#/images/blog/telaa-jodran-matabikh-generated.svg#g' dist/blog/telaa-jodran-matabikh.html
+  fi
+  if [ -f dist/blog/dahan-matabikh-khashab-makkah.html ]; then
+    sed -i 's#/images/blog/tajdid-matabikh-khashab.webp#/images/blog/dahan-matabikh-khashab-makkah-generated.svg#g' dist/blog/dahan-matabikh-khashab-makkah.html
+  fi
+  if [ -f dist/blog/index.html ]; then
+    perl -0pi -e 's#(<a href="/blog/moalem-epoxy-makkah"><img src=")[^"]+#$1/images/blog/moalem-epoxy-makkah-generated.svg#' dist/blog/index.html
+    perl -0pi -e 's#(<a href="/blog/dahan-matabikh-makkah"><img src=")[^"]+#$1/images/blog/dahan-matabikh-makkah-generated.svg#' dist/blog/index.html
+    perl -0pi -e 's#(<a href="/blog/telaa-jodran-matabikh"><img src=")[^"]+#$1/images/blog/telaa-jodran-matabikh-generated.svg#' dist/blog/index.html
+    perl -0pi -e 's#(<a href="/blog/dahan-matabikh-khashab-makkah"><img src=")[^"]+#$1/images/blog/dahan-matabikh-khashab-makkah-generated.svg#' dist/blog/index.html
+  fi
 fi
 
 rm -rf dist/.publish-payload dist/.article-payload dist/.github
