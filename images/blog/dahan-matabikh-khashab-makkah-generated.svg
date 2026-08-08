@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="دهان مطابخ خشب وتغيير لون الدواليب القديمة">
+  <defs>
+    <linearGradient id="warm" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#e3d2ba"/></linearGradient>
+    <linearGradient id="wood" x1="0" x2="1"><stop offset="0" stop-color="#7c4b2b"/><stop offset="1" stop-color="#b17843"/></linearGradient>
+    <linearGradient id="new" x1="0" x2="1"><stop offset="0" stop-color="#eee8dc"/><stop offset="1" stop-color="#b8b2a6"/></linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="25" flood-color="#654321" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#warm)"/>
+  <rect x="420" y="100" width="1000" height="205" rx="12" fill="url(#new)" filter="url(#s)"/>
+  <rect x="465" y="130" width="185" height="145" fill="#d6d0c4"/><rect x="690" y="130" width="185" height="145" fill="#cfc8bd"/><rect x="915" y="130" width="185" height="145" fill="#c7c1b8"/><rect x="1140" y="130" width="230" height="145" fill="#bdb7ad"/>
+  <g stroke="#a89d8c" stroke-width="4" opacity=".72"><path d="M490 155h135v95H490z"/><path d="M715 155h135v95H715z"/><path d="M940 155h135v95H940z"/><path d="M1170 155h170v95h-170z"/></g>
+  <rect x="375" y="325" width="1070" height="55" fill="#efe4d6"/>
+  <rect x="420" y="380" width="1000" height="355" fill="#dfd8cc" filter="url(#s)"/>
+  <rect x="445" y="410" width="175" height="285" fill="url(#new)"/><rect x="640" y="410" width="175" height="285" fill="url(#new)"/><rect x="835" y="410" width="175" height="285" fill="url(#wood)"/><rect x="1030" y="410" width="175" height="285" fill="url(#wood)"/><rect x="1225" y="410" width="170" height="285" fill="url(#wood)"/>
+  <g stroke="#9e8f7a" stroke-width="5"><path d="M475 440h115v225H475z"/><path d="M670 440h115v225H670z"/><path d="M865 440h115v225H865z"/><path d="M1060 440h115v225h-115z"/><path d="M1255 440h110v225h-110z"/></g>
+  <g stroke="#d0a557" stroke-width="7" stroke-linecap="round"><path d="M520 548h34"/><path d="M715 548h34"/><path d="M910 548h34"/><path d="M1105 548h34"/><path d="M1296 548h34"/></g>
+  <path d="M820 418c95-28 162-31 220-8v300c-66-24-135-20-220 7z" fill="#c8c1b5" opacity=".75"/>
+  <g transform="translate(575 515)">
+    <circle cx="120" cy="62" r="35" fill="#c9915f"/>
+    <path d="M78 120c45-27 95-27 140 0l42 250H30z" fill="#243145"/>
+    <path d="M218 139c88-16 167-44 232-84" stroke="#243145" stroke-width="36" stroke-linecap="round" fill="none"/>
+    <path d="M442 58l82-13" stroke="#f7f4ee" stroke-width="10" stroke-linecap="round"/>
+    <rect x="516" y="31" width="120" height="38" rx="8" fill="#f4efe4" stroke="#9c8f7d" stroke-width="4"/>
+    <path d="M515 50h118" stroke="#d7d0c5" stroke-width="7"/>
+  </g>
+  <path d="M20 830h1560" stroke="#cbb99f" stroke-width="3" opacity=".5"/>
+  <circle cx="260" cy="120" r="80" fill="#fff" opacity=".55"/><circle cx="320" cy="120" r="26" fill="#d6b56a" opacity=".35"/>
+</svg>
