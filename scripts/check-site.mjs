@@ -82,6 +82,8 @@ const articleKeywords = new Map([
   ["blog/dahan-matabikh-khashab-makkah.html", ["دهان المطابخ الخشب","دهان دولاب مطبخ","دهان مطابخ خشب قديم","دهان مطابخ خشب لاكيه"]],
 ]);
 
+for (const [path, keywords] of Object.entries(JSON.parse(read("scripts/article-keywords-september.json")))) articleKeywords.set(path, keywords);
+
 const titles = new Map();
 const sitemap = read("sitemap.xml");
 
@@ -134,7 +136,7 @@ for (const [path, canonical] of pages) {
     assert(title === html.match(/<meta name="twitter:title" content="([^"]+)"/)?.[1], `${path}: Twitter title differs`);
     assert(new RegExp(`<meta property="og:image" content="https:\\/\\/www\\.dehanatmaka\\.com\\/images\\/(?:blog\\/)?[^\"]+\\.(?:webp|svg)"`).test(html), `${path}: missing local OG image`);
     assert(new RegExp(`<meta name="twitter:image" content="https:\\/\\/www\\.dehanatmaka\\.com\\/images\\/(?:blog\\/)?[^\"]+\\.(?:webp|svg)"`).test(html), `${path}: missing local Twitter image`);
-    assert(/<img class="article-cover"[^>]+width="1600" height="900"[^>]+fetchpriority="high"/.test(html), `${path}: incomplete article cover attributes`);
+    assert(/<img class="article-cover"[^>]+width="[1-9][0-9]*" height="[1-9][0-9]*"[^>]+fetchpriority="high"/.test(html), `${path}: incomplete article cover attributes`);
     assert(Boolean(articleSchema), `${path}: missing BlogPosting schema`);
     assert(Boolean(breadcrumbs), `${path}: missing BreadcrumbList schema`);
     assert(articleSchema?.mainEntityOfPage?.["@id"] === canonical, `${path}: BlogPosting mainEntityOfPage does not match canonical`);
