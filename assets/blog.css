@@ -596,3 +596,6 @@ body.primary-menu-open .floating-actions { visibility: hidden; opacity: 0; }
   .primary-mobile-menu,
   .primary-mobile-backdrop { display: none !important; }
 }
+
+/* NasharHub footer credit */
+.footer-credit{display:flex;flex-direction:column;align-items:center;gap:15px}.footer-credit>p{margin:0}.nashar-hub-container{display:flex;align-items:center;justify-content:center;gap:12px;font-family:Cairo,sans-serif}.design-text{color:#9ca3af;font-size:14px}.nashar-btn{position:relative;overflow:hidden;padding:6px 16px;border-radius:8px;background:linear-gradient(to right,rgba(0,217,90,.1),rgba(0,217,90,.05));border:1px solid rgba(0,217,90,.2);transition:all .3s ease;text-decoration:none!important;display:inline-flex;align-items:center;box-shadow:0 1px 2px rgba(0,0,0,.05)}.nashar-text{position:relative;z-index:10;font-weight:700;color:#00d95a;transition:color .3s ease;font-size:15px}.hover-bg{position:absolute;inset:0;background:rgba(0,217,90,.05);transform:translateY(100%);transition:transform .3s ease}.nashar-btn:hover{border-color:rgba(0,217,90,.5);transform:translateY(-1px)}.nashar-btn:hover .nashar-text{color:#fff}.nashar-btn:hover .hover-bg{transform:translateY(0);background:#00d95a}@media(max-width:480px){.nashar-hub-container{flex-direction:column;gap:8px}}
