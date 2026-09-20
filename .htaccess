@@ -1,0 +1,17 @@
+# Serve clean, extensionless URLs for static HTML pages.
+# Example: /blog/moalem-decor-makkah -> /blog/moalem-decor-makkah.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Leave real files and directories untouched.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Internally serve the matching .html file while keeping the clean URL.
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>
+
+# Prevent directory listings if the host enables them by default.
+Options -Indexes
