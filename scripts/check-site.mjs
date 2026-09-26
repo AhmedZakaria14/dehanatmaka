@@ -12,7 +12,8 @@ const routeToFile = (route) => {
   const clean = route.split(/[?#]/)[0].replace(/\/$/, "");
   if (!clean || clean === "/") return "index.html";
   if (clean === "/blog") return "blog/index.html";
-  return `${clean.slice(1)}.html`;
+  const path = clean.slice(1);
+  return /\.[^/]+$/.test(path) ? path : `${path}.html`;
 };
 
 const resolveLocalHref = (href) => {
@@ -84,6 +85,11 @@ const articleKeywords = new Map([
 
 for (const [path, keywords] of Object.entries(JSON.parse(read("scripts/article-keywords-september.json")))) articleKeywords.set(path, keywords);
 
+// Additional published articles use the same keyword validation as older pages.
+articleKeywords.set("blog/moalem-decor-jeddah.html", ["معلم ديكورات"]);
+articleKeywords.set("blog/moalem-marble-alternative-makkah.html", ["معلم بديل الرخام مكه", "معلم بديل الرخام"]);
+articleKeywords.set("blog/moalem-gypsum-board-taif-hawiyah.html", ["معلم جبس بورد الطائف الحوية", "معلم جبس الحوية"]);
+
 const titles = new Map();
 const sitemap = read("sitemap.xml");
 
@@ -154,11 +160,11 @@ for (const [path, canonical] of pages) {
     assert(internalLinksInMain.length >= 2, `${path}: too few internal links inside article area`);
     if (newestArticles.has(path)) {
       assert(internalLinksInMain.length >= 4, `${path}: newest article needs richer internal linking`);
-      const generatedImage = newestArticles.get(path);
-      assert(existsSync(new URL(generatedImage.slice(1), root)), `${path}: generated article image is missing`);
-      const buildScript = read("scripts/build-vercel.sh");
-      assert(buildScript.includes(path.replace("blog/", "dist/blog/")), `${path}: build script does not target this newest article`);
-      assert(buildScript.includes(generatedImage), `${path}: build script does not apply the generated image`);
+      // Validate the published cover, preserving real project photos.
+      // The build no longer replaces these covers with generated SVGs.
+      const cover = html.match(/<img class="article-cover"[^>]+src="([^"]+)"/)?.[1];
+      const coverPath = cover && localAssetPath(cover, path);
+      assert(Boolean(coverPath) && existsSync(new URL(coverPath, root)), `${path}: local article cover is missing`);
     }
   }
 }
@@ -168,9 +174,7 @@ for (const path of articlePaths) {
   const slug = path.replace(/^blog\//, "").replace(/\.html$/, "");
   assert(blogIndex.includes(`/blog/${slug}`), `blog/index.html: missing card for ${slug}`);
 }
-for (const image of newestArticles.values()) {
-  assert(read("scripts/build-vercel.sh").includes(image), `build-vercel.sh: missing generated image replacement ${image}`);
-}
+
 
 const staticNavigation = read("assets/static-navigation.js");
 assert(staticNavigation.includes("mobile-blog-link"), "navigation: mobile blog link wrapper is missing");
