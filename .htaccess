@@ -1,7 +1,17 @@
-# Serve clean, extensionless URLs for static HTML pages.
-# Example: /blog/moalem-decor-makkah -> /blog/moalem-decor-makkah.html
+# Canonical URL handling for static HTML pages.
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Redirect direct index.html requests to the canonical directory URL.
+  RewriteCond %{THE_REQUEST} \s/+index\.html(?:[\s?]) [NC]
+  RewriteRule ^index\.html$ / [R=301,L,NE]
+
+  RewriteCond %{THE_REQUEST} \s/+blog/index\.html(?:[\s?]) [NC]
+  RewriteRule ^blog/index\.html$ /blog [R=301,L,NE]
+
+  # Redirect direct .html requests to the clean canonical URL.
+  RewriteCond %{THE_REQUEST} \s/+(.+?)\.html(?:[\s?]) [NC]
+  RewriteRule ^(.+?)\.html$ /$1 [R=301,L,NE]
 
   # Leave real files and directories untouched.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -12,6 +22,8 @@
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
   RewriteRule ^(.+?)/?$ $1.html [L]
 </IfModule>
+
+DirectoryIndex index.html
 
 # Prevent directory listings if the host enables them by default.
 Options -Indexes
