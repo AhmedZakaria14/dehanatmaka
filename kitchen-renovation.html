@@ -153,6 +153,11 @@
       .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
       .img-container:hover img { transform: scale(1.05); }
 
+      .execution-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+      @media (min-width: 768px) { .execution-gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+      .execution-gallery .img-container { aspect-ratio: 3/4; border-radius: .75rem; }
+      .execution-video { display: block; width: min(100%, 340px); max-height: 540px; margin: 1rem auto 0; border-radius: .75rem; background: #111; }
+
       .label-badge {
         position: absolute;
         top: 12px;
@@ -272,6 +277,30 @@
             <h2 class="text-3xl font-black mb-4">نتائج تغيير لون دواليب المطابخ</h2>
             <p class="opacity-70">نماذج حقيقية توضح التحول الجذري لشكل المطبخ</p>
           </div>
+
+          <!-- Project 6: documented renovation stages -->
+          <article class="project-card" aria-labelledby="white-kitchen-title">
+            <div class="p-6 border-b"><h3 id="white-kitchen-title" class="text-xl font-black">مراحل تجديد مطبخ من اللون البني إلى الأبيض</h3></div>
+            <div class="p-6">
+              <h4 class="font-bold mb-4">قبل التجديد</h4>
+              <div class="execution-gallery mb-6">
+                <button type="button" class="img-container" aria-label="تكبير صورة المطبخ قبل التجديد، الواجهة الأولى"><span class="label-badge">قبل</span><img src="/images/white-kitchen-before-01.jpg" alt="دواليب المطبخ البنية قبل تجديد لونها" loading="lazy" decoding="async"></button>
+                <button type="button" class="img-container" aria-label="تكبير صورة المطبخ قبل التجديد، الواجهة الثانية"><span class="label-badge">قبل</span><img src="/images/white-kitchen-before-02.jpg" alt="زاوية الحوض والشفاط في المطبخ قبل التجديد" loading="lazy" decoding="async"></button>
+              </div>
+              <h4 class="font-bold mb-4">أثناء التنفيذ</h4>
+              <div class="execution-gallery">
+                <button type="button" class="img-container" aria-label="تكبير صورة رش الدواليب أثناء التنفيذ"><span class="label-badge">أثناء التنفيذ</span><img src="/images/white-kitchen-process.jpg" alt="فني يرش واجهات دواليب المطبخ أثناء تغيير اللون" loading="lazy" decoding="async"></button>
+              </div>
+              <video class="execution-video" controls preload="none" playsinline poster="/images/white-kitchen-process.jpg" aria-label="مقطع قصير من مراحل تنفيذ تجديد المطبخ"><source src="/videos/white-kitchen-process.mp4" type="video/mp4">المتصفح لا يدعم تشغيل الفيديو.</video>
+              <h4 class="font-bold mb-4 mt-8">بعد تغيير اللون وتجديد الأسطح</h4>
+              <div class="execution-gallery">
+                <button type="button" class="img-container" aria-label="تكبير صورة النتيجة، الواجهة الأولى"><span class="label-badge label-after">بعد</span><img src="/images/white-kitchen-after-01.jpg" alt="الدواليب البيضاء والسطح المجدد في المطبخ من الزاوية الأولى" loading="lazy" decoding="async"></button>
+                <button type="button" class="img-container" aria-label="تكبير صورة النتيجة، الواجهة الثانية"><span class="label-badge label-after">بعد</span><img src="/images/white-kitchen-after-02.jpg" alt="نتيجة تجديد المطبخ الأبيض من جهة الشفاط والثلاجة" loading="lazy" decoding="async"></button>
+                <button type="button" class="img-container" aria-label="تكبير صورة النتيجة، الواجهة الثالثة"><span class="label-badge label-after">بعد</span><img src="/images/white-kitchen-after-03.jpg" alt="تفاصيل الدواليب البيضاء وسطح المطبخ بعد التجديد" loading="lazy" decoding="async"></button>
+                <button type="button" class="img-container" aria-label="تكبير صورة النتيجة، الواجهة الرابعة"><span class="label-badge label-after">بعد</span><img src="/images/white-kitchen-after-04.jpg" alt="المطبخ الأبيض بعد تجديد الدواليب والسطح من زاوية واسعة" loading="lazy" decoding="async"></button>
+              </div>
+            </div>
+          </article>
 
           <!-- Project 1 -->
           <div class="project-card">
